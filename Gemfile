@@ -34,9 +34,19 @@ group :development do
 end
 
 
+# Haml as the templating engine for Rails
 gem 'haml-rails', '~> 0.9'
 
+# APPLICATION PROGRAMMING INTERFACE (API)
 gem 'grape', '~> 0.9.0'
 gem 'grape-swagger', '~> 0.8.0'
 gem 'grape-swagger-rails', git: 'https://github.com/ruby-grape/grape-swagger-rails'
 gem 'rack-cors', :require => 'rack/cors'
+
+# Flexible authentication solution for Rails with Warden
+gem 'devise'
+# Extracted Token Authenticatable module of devise
+gem 'devise-token_authenticatable'
+
+# XML/JSON API responses
+gem 'acts_as_api', '~> 0.4.2'
