@@ -1,0 +1,24 @@
+{
+  "name": "spa_template",
+  "homepage": "https://github.com/TaganTeam/spa_template",
+  "authors": [
+    "Vyachaslav Kuzharov <marhuz.61@gmail.com>"
+  ],
+  "description": "template for SPA",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "1.5.6",
+    "angular-ui-router": "^0.3.1",
+    "angular-animate": "^1.5.6",
+    "angular-messages": "^1.5.6",
+    "a0-angular-storage": "^0.0.15"
+  }
+}
