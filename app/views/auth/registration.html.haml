@@ -1,22 +1,25 @@
-= form_for(@user, url: user_registration_path, method: :post) do |f|
-  .form-group
-    .col-lg-12
-      .input-group.input-icon
-        %span.input-group-addon
-          %i.fa.fa-envelope
-        = f.email_field :email, class: 'form-control', placeholder: 'Email', autocomplete: :off
-  .form-group
-    .col-lg-12
-      .input-group.input-icon
-        %span.input-group-addon
-          %i.fa.fa-key
-        = f.password_field :password, class: 'form-control', autocomplete: :off, placeholder: 'Password'
-  .form-group
-    .col-lg-12
-      .input-group.input-icon
-        %span.input-group-addon
-          %i.fa.fa-key
-        = f.password_field :password_confirmation, class: 'form-control', autocomplete: :off, placeholder: 'Password Confirmation'
-  .form-group.mb0
-    .col-md-12
-      = submit_tag 'Register', class: 'btn btn-success'
+.container
+  .row
+    .col-md-6
+      = form_for(@user, url: user_registration_path, method: :post) do |f|
+        .form-group
+          .col-lg-12
+            .input-group.input-icon
+              %span.input-group-addon
+                %i.fa.fa-envelope
+              = f.email_field :email, class: 'form-control', placeholder: 'Email', autocomplete: :off
+        .form-group
+          .col-lg-12
+            .input-group.input-icon
+              %span.input-group-addon
+                %i.fa.fa-key
+              = f.password_field :password, class: 'form-control', autocomplete: :off, placeholder: 'Password'
+        .form-group
+          .col-lg-12
+            .input-group.input-icon
+              %span.input-group-addon
+                %i.fa.fa-key
+              = f.password_field :password_confirmation, class: 'form-control', autocomplete: :off, placeholder: 'Password Confirmation'
+        .form-group.mb0
+          .col-md-12
+            = submit_tag 'Register', class: 'btn btn-success'

@@ -3,6 +3,8 @@
 //= require angular-animate
 //= require angular-messages
 //= require a0-angular-storage
+//= require angular-bootstrap
+//= require angular-touch
 
 
 

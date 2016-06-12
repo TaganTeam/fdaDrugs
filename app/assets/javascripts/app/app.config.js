@@ -3,9 +3,9 @@ angular
         'ui.router',
         'ngMessages',
         'ngAnimate',
-        'angular-storage'
-        // 'ui.bootstrap'
-        // 'ngTouch'
+        'angular-storage',
+        'ui.bootstrap',
+        'ngTouch'
     ])
     .constant('CONFIG',
         {
