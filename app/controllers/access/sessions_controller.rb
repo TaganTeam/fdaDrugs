@@ -29,4 +29,8 @@ class Access::SessionsController < Devise::SessionsController
       respond_with resource, location: signed_in_root_path(resource)
     end
   end
+
+  def new
+    redirect_to login_path
+  end
 end

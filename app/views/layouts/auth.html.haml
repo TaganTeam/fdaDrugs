@@ -7,4 +7,8 @@
     = javascript_include_tag 'auth'
     = csrf_meta_tags
   %body
+    - flash.each do |key, value|
+      .global-alert.col-md-6.col-md-offset-3{:style => "color: #FD3E58;"}
+        %div
+          = value
     = yield
