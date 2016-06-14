@@ -1,25 +1,15 @@
 .container
-  .row
-    .col-md-6
-      = form_for(@user, url: user_registration_path, method: :post) do |f|
-        .form-group
-          .col-lg-12
-            .input-group.input-icon
-              %span.input-group-addon
-                %i.fa.fa-envelope
-              = f.email_field :email, class: 'form-control', placeholder: 'Email', autocomplete: :off
-        .form-group
-          .col-lg-12
-            .input-group.input-icon
-              %span.input-group-addon
-                %i.fa.fa-key
-              = f.password_field :password, class: 'form-control', autocomplete: :off, placeholder: 'Password'
-        .form-group
-          .col-lg-12
-            .input-group.input-icon
-              %span.input-group-addon
-                %i.fa.fa-key
-              = f.password_field :password_confirmation, class: 'form-control', autocomplete: :off, placeholder: 'Password Confirmation'
-        .form-group.mb0
-          .col-md-12
-            = submit_tag 'Register', class: 'btn btn-success'
+  .card.card-container
+    = image_tag("//ssl.gstatic.com/accounts/ui/avatar_2x.png", class: 'profile-img-card', id: 'profile-img')
+    %p#profile-name.profile-name-card
+    = form_for(@user, url: user_registration_path, method: :post, html:{class: 'form-signin'}) do |f|
+      %span#reauth-email.reauth-email
+      = f.email_field :email, class: 'form-control', id: 'inputEmail', placeholder: 'Email', autocomplete: :off
+      = f.password_field :password, class: 'form-control', id: 'inputPassword', placeholder: 'Password'
+      = f.password_field :password_confirmation, class: 'form-control', id: 'inputPassword', autocomplete: :off, placeholder: 'Password Confirmation'
+
+      = submit_tag 'Sign Up', class: 'btn btn-lg btn-primary btn-block btn-signin'
+
+    %p{style:'margin-top: 10px;'}
+      Already have an account?
+      = link_to 'Login', login_path, class: 'forgot-password', style: 'margin-left: 10px'
