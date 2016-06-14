@@ -50,3 +50,5 @@ gem 'devise-token_authenticatable'
 
 # XML/JSON API responses
 gem 'acts_as_api', '~> 0.4.2'
+
+gem 'wombat', '~> 2.5', '>= 2.5.1'
