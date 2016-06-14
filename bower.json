@@ -1,10 +1,10 @@
 {
-  "name": "spa_template",
-  "homepage": "https://github.com/TaganTeam/spa_template",
+  "name": "bshc_piv",
+  "homepage": "https://bitbucket.org/tagan-team/bshc_piv/overview",
   "authors": [
     "Vyachaslav Kuzharov <marhuz.61@gmail.com>"
   ],
-  "description": "template for SPA",
+  "description": "bshc_piv",
   "main": "",
   "license": "MIT",
   "ignore": [
