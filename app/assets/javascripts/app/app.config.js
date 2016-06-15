@@ -1,5 +1,5 @@
 angular
-    .module('appName', [
+    .module('bshcPiv', [
         'ui.router',
         'ngMessages',
         'ngAnimate',

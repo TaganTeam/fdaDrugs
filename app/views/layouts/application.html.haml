@@ -1,5 +1,5 @@
 !!!
-%html{"ng-app" => "appName"}
+%html{"ng-app" => "bshcPiv"}
   %head
     %meta{content: 'text/html; charset=UTF-8', 'http-equiv' => 'Content-Type'}/
     %title BshcPiv
@@ -8,5 +8,7 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
   %body
-    .app-content
+
+    %toolbar
+    .container
       %div{"ui-view" => ""}

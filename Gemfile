@@ -48,7 +48,13 @@ gem 'devise'
 # Extracted Token Authenticatable module of devise
 gem 'devise-token_authenticatable'
 
+#A Scope & Engine based paginator
+gem 'kaminari'
+
 # XML/JSON API responses
 gem 'acts_as_api', '~> 0.4.2'
 
 gem 'wombat', '~> 2.5', '>= 2.5.1'
+
+gem 'delayed_job_active_record'
+gem 'clockwork'
