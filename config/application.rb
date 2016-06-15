@@ -24,5 +24,14 @@ module BshcPiv
     config.active_record.raise_in_transactional_callbacks = true
 
     config.assets.precompile += %w( auth.css auth.js )
+
+    config.middleware.insert_before 0, 'Rack::Cors' do
+      allow do
+        origins '*'
+        resource '*',
+                 headers: :any,
+                 methods: [:get, :post, :delete, :put, :head]
+      end
+    end
   end
 end
