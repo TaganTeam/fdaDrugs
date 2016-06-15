@@ -1,0 +1,13 @@
+{
+  "name": "bshc_piv",
+  "version": "1.0.0",
+  "description": "test app",
+  "scripts": {
+    "postinstall": "bower install"
+  },
+  "author": "vk",
+  "license": "ISC",
+  "dependencies": {
+    "bower": "1.7.9"
+  }
+}
