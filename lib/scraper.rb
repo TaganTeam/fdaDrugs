@@ -10,8 +10,7 @@ module Scraper
     def initialize; end
 
     def parse
-      ['Z', '0-9'].each do |category|
-      # [*('A'..'Z'), '0-9'].each do |category|
+      [*('A'..'Z'), '0-9'].each do |category|
         @current_category = category
         parse_category
       end
@@ -19,6 +18,7 @@ module Scraper
 
     def parse_category
       set_current_start_row
+      sleep 0.5
       get_drug_names
       ensure_drugs!
 

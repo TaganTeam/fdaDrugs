@@ -1,0 +1,364 @@
+/* Layout styles that deal with the overall page structure */
+/* Masthead is the upper part of the header, containing logo and navigation*/
+.masthead {
+  padding-top: 5px;
+  padding-bottom: 8px;
+}
+.masthead #logo {
+  float: left;
+  display: block;
+  color: #e9e4da;
+  font-family: 'PT Serif', serif;
+  font-size: 39px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+.masthead #logo img {
+  margin-top: -10px;
+}
+
+/* Widewrappers that span the whole width of the page */
+.widewrapper {
+  background-color: #e9e4da;
+}
+.widewrapper.main {
+  -webkit-box-shadow: inset 1px 10px 8px -8px #ababab;
+  -moz-box-shadow: inset 1px 10px 8px -8px #ababab;
+  box-shadow: inset 1px 10px 8px -8px #ababab;
+}
+.widewrapper.masthead {
+  background-color: #e84423;
+  color: #e9e4da;
+}
+.widewrapper.subheader {
+  background-color: #343434;
+  color: #e9e4da;
+  font-size: 16px;
+  min-height: 63px;
+}
+
+/* Styles for the navigation, both mobile and desktop */
+/* Desktop version of the navigation */
+.news-nav .nav-pills {
+  margin-top: 19px;
+  margin-bottom: 0;
+  font-size: 16px;
+}
+.news-nav .nav-pills > li {
+  margin-left: 10px;
+}
+.news-nav .nav-pills > li > a {
+  color: #e9e4da;
+  padding: 11px 16px;
+  line-height: 14px;
+}
+.news-nav .nav-pills > li > a:hover,
+.news-nav .nav-pills > li > a:focus {
+  color: #e9e4da;
+  background-color: #f06448;
+}
+.news-nav .nav-pills > li.dropdown.open.active > a:hover,
+.news-nav .nav-pills > li.dropdown.open.active > a:focus {
+  background-color: #f06448;
+}
+.news-nav .nav-pills .open .dropdown-toggle {
+  background-color: #f06448;
+}
+.news-nav .nav-pills > .active > a {
+  background-color: #f06448;
+}
+.news-nav .nav-pills > .active > a:hover,
+.news-nav .nav-pills > .active > a:focus {
+  background-color: #f06448;
+}
+.news-nav .nav-pills .dropdown-menu {
+  font-size: 16px;
+  border-radius: 6px;
+}
+.news-nav .caret {
+  border-color: #e9e4da transparent transparent transparent !important;
+  display: none;
+}
+.news-nav .dropdown .caret {
+  margin-left: 7px;
+}
+.news-nav .dropdown-menu {
+  background-color: rgba(232, 68, 35, 0.9);
+  border-color: transparent;
+  /*IE 8 Legacy */
+  border: 1px solid #e84423;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.52);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.52);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.52);
+  margin: 2px 0 0;
+  min-width: 160px;
+  padding: 5px 0;
+}
+.news-nav .dropdown-menu > li > a {
+  color: #e9e4da;
+  line-height: 30px;
+  white-space: nowrap;
+}
+.news-nav .dropdown-menu > li > a:hover,
+.news-nav .dropdown-menu > li > a:focus {
+  background-color: #636c74;
+  background-color: rgba(255, 255, 255, 0.15);
+  background-image: none;
+  color: #e9e4da;
+  filter: none;
+}
+.news-nav .navbar-collapse {
+  box-shadow: none;
+}
+.news-nav .navbar-nav > li > .dropdown-menu {
+  margin-top: 2px;
+}
+/* The button that expands the navigation in mobile-mode */
+#mobile-nav-toggle {
+  display: none;
+  margin-top: 10px;
+}
+@media (max-width: 767px) {
+  #mobile-nav-toggle {
+    display: block;
+  }
+}
+#mobile-nav-toggle a:hover,
+#mobile-nav-toggle a:focus {
+  text-decoration: none;
+}
+#mobile-nav-toggle .fa {
+  color: #e9e4da;
+}
+/* Mobile version of the navigation */
+@media (max-width: 767px) {
+  .masthead {
+    padding-bottom: 0px;
+  }
+  .news-nav {
+    box-shadow: none;
+    background-color: #f06448;
+    float: left !important;
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+  }
+  .news-nav .navbar-collapse {
+    max-height: none;
+  }
+  .news-nav .nav-pills > li {
+    margin-left: 0;
+    float: none;
+  }
+  .news-nav .nav-pills > li > a {
+    margin-left: 40px;
+    margin-right: 40px;
+  }
+  .news-nav .nav-pills > li a {
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+  }
+  .news-nav .nav-pills > li:first-child > a {
+    border-top: none;
+  }
+  .news-nav .nav-pills > li > a:hover,
+  .news-nav .nav-pills > li > a:focus {
+    background: transparent;
+  }
+  .news-nav .nav-pills > li.dropdown.open.active > a:hover,
+  .news-nav .nav-pills > li.dropdown.open.active > a:focus {
+    background: transparent;
+  }
+  .news-nav .nav-pills .active > a,
+  .news-nav .nav-pills .active > a:hover,
+  .news-nav .nav-pills .active > a:focus {
+    background: transparent;
+  }
+  .news-nav .nav-pills .open .dropdown-toggle {
+    background-color: transparent;
+    border-color: #eedbd8;
+    padding-bottom: 7px;
+  }
+  .news-nav .nav-pills .dropdown-toggle .caret {
+    float: right;
+    margin-top: 14px;
+  }
+  .news-nav .nav-pills .dropdown-menu {
+    background-color: #ed816c;
+  }
+  .news-nav .nav-pills .dropdown.open {
+    background-color: #ed816c;
+  }
+  .news-nav .caret {
+    border-color: #e9e4da transparent transparent transparent !important;
+    border-width: 6px;
+    display: block;
+  }
+  .news-nav .dropdown-menu {
+    margin-top: 0;
+    padding-top: 0;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    border: none;
+  }
+  .news-nav .dropdown-menu > li {
+    margin-left: 35px;
+  }
+  .news-nav .dropdown-menu > li > a {
+    padding-top: 9px;
+    padding-bottom: 9px !important;
+    font-size: 18px;
+    line-height: 27px;
+  }
+  .news-nav .dropdown-menu > li > a:hover,
+  .news-nav .dropdown-menu > li > a:focus {
+    background-color: transparent;
+  }
+  .news-nav .navbar-nav .open .dropdown-menu > li > a {
+    padding-top: 9px;
+    padding-bottom: 9px;
+    line-height: 27px;
+  }
+}
+
+/* Elements that are used througout news, such as Searchboxes, Blog elements, Widgets, etc. etc. */
+.news-breadcrumb {
+  color: #e9e4da;
+  float: left;
+  margin-top: 19px;
+}
+.news-breadcrumb a {
+  color: #e9e4da;
+}
+.news-breadcrumb a:hover,
+.news-breadcrumb a:focus {
+  text-decoration: none;
+}
+.news-breadcrumb .separator {
+  margin: 0 10px 0 10px;
+}
+/* The searchbox in the subheader on top of the site */
+.news-searchbox {
+  float: right;
+  display: inline-block;
+  min-width: 210px;
+  margin-bottom: 16px;
+  margin-top: 16px;
+}
+.news-searchbox form {
+  margin: 0;
+}
+.news-searchbox .fa {
+  color: #252525;
+  font-size: 19px;
+}
+.news-searchbox .searchbutton,
+.news-searchbox .searchfield {
+  color: #252525;
+  background-color: #6e6e6e;
+}
+.news-searchbox .searchbutton {
+  display: inline-block;
+  border: none;
+  line-height: 20px;
+  padding: 4px 5px 4px 15px;
+  height: 31px;
+  vertical-align: middle;
+  -webkit-border-top-left-radius: 15px;
+  -moz-border-radius-topleft: 15px;
+  border-top-left-radius: 15px;
+  -webkit-border-bottom-left-radius: 15px;
+  -moz-border-radius-bottomleft: 15px;
+  border-bottom-left-radius: 15px;
+  -webkit-box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+}
+.news-searchbox .searchbutton a:hover,
+.news-searchbox .searchbutton a:focus {
+  text-decoration: none;
+}
+.news-searchbox .searchfield {
+  border: none;
+  height: 22px;
+  line-height: 22px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 4px 6px 5px 6px;
+  vertical-align: middle;
+  display: inline-block;
+  margin-bottom: 0;
+  width: 160px;
+  font-size: 16px;
+  -webkit-border-top-right-radius: 15px;
+  -moz-border-radius-topright: 15px;
+  border-top-right-radius: 15px;
+  -webkit-border-bottom-right-radius: 15px;
+  -moz-border-radius-bottomright: 15px;
+  border-bottom-right-radius: 15px;
+  -webkit-border-top-left-radius: 0px;
+  -moz-border-radius-topleft: 0px;
+  border-top-left-radius: 0px;
+  -webkit-border-bottom-left-radius: 0px;
+  -moz-border-radius-bottomleft: 0px;
+  border-bottom-left-radius: 0px;
+  -webkit-box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+  margin-left: -4px;
+  outline: none;
+}
+.news-searchbox .searchfield::-webkit-input-placeholder {
+  color: #252525;
+}
+.news-searchbox .searchfield:-moz-placeholder {
+  color: #252525;
+}
+.news-searchbox .searchfield::-moz-placeholder {
+  color: #252525;
+}
+.news-searchbox .searchfield:-ms-input-placeholder {
+  color: #252525;
+}
+.news-searchbox .searchfield:focus {
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+  -moz-box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+  box-shadow: inset 3px 5px 0px -4px rgba(0, 0, 0, 0.06);
+}
+/* The list with special bullet points, used both on blog widgets as well */
+.news-list {
+  list-style: none;
+}
+.news-list li {
+  line-height: 23px;
+  margin-bottom: 14px;
+}
+.news-list li a:hover,
+.news-list li a:focus {
+  color: #e84423;
+}
+.news-list li:before {
+  content: "";
+  border-color: transparent transparent transparent #202020;
+  border-style: solid;
+  border-width: 3px 8px;
+  display: block;
+  width: 8px;
+  left: -20px;
+  top: 15px;
+  position: relative;
+}

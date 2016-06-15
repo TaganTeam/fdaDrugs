@@ -1,0 +1,60 @@
+<header>
+    <div class="widewrapper masthead">
+        <div class="container">
+            <a ui-sref="news" id="logo">
+                bshc_piv
+            </a>
+
+            <div id="mobile-nav-toggle" class="pull-right">
+                <a href="#" data-toggle="collapse" data-target=".news-nav .navbar-collapse">
+                    <i class="fa fa-bars"></i>
+                </a>
+            </div>
+
+            <nav class="pull-right news-nav">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav nav-pills navbar-nav">
+
+                        <!--<li class="dropdown active">-->
+                        <!--<a class="dropdown-toggle" data-toggle="dropdown" href="#">-->
+                        <!--Blog-->
+                        <!--<b class="caret"></b>-->
+                        <!--</a>-->
+                        <!--<ul class="dropdown-menu">-->
+                        <!--<li><a href="index.html">Blog</a></li>-->
+                        <!--<li><a href="blog-detail.html">Blog Detail</a></li>-->
+                        <!--</ul>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#" ng-click="toolbarCtrl.openlogin()"-->
+                               <!--ng-if="!toolbarCtrl.authService.isAuth()">-->
+                                <!--Login-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <li>
+                            <a href="#" ng-click="toolbarCtrl.logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+
+    <div class="widewrapper subheader">
+        <div class="container">
+            <div class="news-breadcrumb">
+                <a href="#">Some link</a>
+            </div>
+
+            <div class="news-searchbox">
+                <form action="#" method="get" accept-charset="utf-8">
+                    <button class="searchbutton" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>
+                    <input class="searchfield" id="searchbox" type="text" placeholder="Search">
+                </form>
+            </div>
+        </div>
+    </div>
+</header>

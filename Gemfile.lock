@@ -56,6 +56,9 @@ GEM
     bcrypt (3.1.11)
     builder (3.2.2)
     byebug (9.0.5)
+    clockwork (2.0.0)
+      activesupport
+      tzinfo
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
     coffee-rails (4.1.1)
@@ -66,6 +69,11 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    delayed_job (4.1.2)
+      activesupport (>= 3.0, < 5.1)
+    delayed_job_active_record (4.1.1)
+      activerecord (>= 3.0, < 5.1)
+      delayed_job (>= 3.0, < 5)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
     devise (4.1.1)
@@ -120,6 +128,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.3)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     libv8 (3.16.14.15)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -241,7 +252,9 @@ PLATFORMS
 DEPENDENCIES
   acts_as_api (~> 0.4.2)
   byebug
+  clockwork
   coffee-rails (~> 4.1.0)
+  delayed_job_active_record
   devise
   devise-token_authenticatable
   grape (~> 0.9.0)
@@ -249,6 +262,7 @@ DEPENDENCIES
   grape-swagger-rails!
   haml-rails (~> 0.9)
   jquery-rails
+  kaminari
   pg (~> 0.15)
   rack-cors
   rails (= 4.2.6)

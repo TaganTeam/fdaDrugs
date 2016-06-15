@@ -1,5 +1,5 @@
 angular
-    .module('appName')
+    .module('bshcPiv')
     .config([
         '$stateProvider',
         '$httpProvider',
@@ -14,11 +14,17 @@ angular
             $urlRouterProvider.otherwise('/');
 
             $stateProvider
-                .state('root', {
+                .state('drugs', {
                     url: '/',
-                    templateUrl: 'assets/app/components/root/root.tpl.html',
-                    controller: 'rootController',
-                    controllerAs: 'rootCtrl'
+                    templateUrl: 'assets/app/components/drugs/drugs.tpl.html',
+                    controller: 'drugsController',
+                    controllerAs: 'drugsCtrl'
+                })
+                .state('paging', {
+                    url: '/drugs?page',
+                    templateUrl: 'assets/app/components/drugs/drugs.tpl.html',
+                    controller: 'drugsController',
+                    controllerAs: 'drugsCtrl'
                 });
 
         }]);

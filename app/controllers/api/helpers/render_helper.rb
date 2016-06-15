@@ -2,6 +2,9 @@ module API::Helpers::RenderHelper
   def success!(resource, status=200, status_code="success", opts={})
     content_type("application/json")
     Rails.logger.info "[api-complete] Requested: #{simple_log_data}"
+
+    # resource = resource.map { |item| item.merge({count: opts[:all_count]})} if opts[:all_count]
+
     { code:   status,
       status: status_code,
       data:   resource
