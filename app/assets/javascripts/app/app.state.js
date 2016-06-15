@@ -24,7 +24,10 @@ angular
                     url: '/drugs?page',
                     templateUrl: 'assets/app/components/drugs/drugs.tpl.html',
                     controller: 'drugsController',
-                    controllerAs: 'drugsCtrl'
+                    controllerAs: 'drugsCtrl',
+                    params: {
+                        page: null
+                    }
                 });
 
         }]);

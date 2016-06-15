@@ -19,15 +19,17 @@
 
 <div class="container">
     <div class="paging text-center">
-        <uib-pagination ng-model="drugsCtrl.currentPage"
-                        total-items="drugsCtrl.totalItems"
-                        max-size="drugsCtrl.maxSize"
-                        ng-change="drugsCtrl.pageChanged()"
-                        items-per-page = "drugsCtrl.numPages"
-                        boundary-link-numbers="true"
-                        rotate="false"
-                        class="pagination-sm">
-        </uib-pagination>
+        <div ng-if="drugsCtrl.totalItems">
+            <uib-pagination ng-model="drugsCtrl.currentPage"
+                            total-items="drugsCtrl.totalItems"
+                            max-size="drugsCtrl.maxSize"
+                            ng-change="drugsCtrl.pageChanged(drugsCtrl.currentPage)"
+                            items-per-page="drugsCtrl.perPage"
+                            boundary-link-numbers="true"
+                            rotate="false"
+                            class="pagination-sm">
+            </uib-pagination>
+        </div>
     </div>
 
 </div>

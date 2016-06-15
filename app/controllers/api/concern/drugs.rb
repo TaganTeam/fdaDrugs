@@ -13,7 +13,7 @@ module API
 
        get do
          drugs = Drug.all
-         drugs = drugs.order('created_at DESC').page(page).per(per_page)
+         drugs = drugs.page(page).per(per_page)
          success! drugs.as_api_response(:basic), 200, 'success', {all_count: Drug.count}
        end
      end
