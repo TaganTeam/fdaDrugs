@@ -4,7 +4,7 @@
         .module('bshcPiv')
         .directive('toolbar', toolbar);
 
-    toolbar.$inject = ['CONFIG', '$http', '$window'];
+    toolbarController.$inject = ['CONFIG', '$http', '$window'];
 
     function toolbar() {
         return {
@@ -14,6 +14,7 @@
         };
 
         
+
         function toolbarController(CONFIG, $http, $window) {
             var vm = this;
             vm.logout = logout;
