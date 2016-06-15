@@ -4,6 +4,8 @@
         .module('bshcPiv')
         .directive('toolbar', toolbar);
 
+    toolbar.$inject = ['CONFIG', '$http', '$window'];
+
     function toolbar() {
         return {
             templateUrl: 'assets/app/components/toolbar/toolbar.tpl.html',
@@ -11,8 +13,7 @@
             controllerAs: 'toolbarCtrl'
         };
 
-        toolbarController.$inject = ['CONFIG', '$http', '$window'];
-
+        
         function toolbarController(CONFIG, $http, $window) {
             var vm = this;
             vm.logout = logout;
