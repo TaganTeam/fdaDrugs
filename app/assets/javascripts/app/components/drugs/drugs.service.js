@@ -12,7 +12,7 @@
         };
 
         function getDrugs(page) {
-            return  $http.get(CONFIG.APIHost + '/api/v1/drugs', {
+            return  $http.get(CONFIG.APIProductionHost + '/api/v1/drugs', {
                 params:{
                     page: page
                 }
