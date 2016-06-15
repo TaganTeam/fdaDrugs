@@ -62,3 +62,5 @@ gem 'wombat', '~> 2.5', '>= 2.5.1'
 
 gem 'delayed_job_active_record'
 gem 'clockwork'
+
+gem 'angular-rails-templates'
