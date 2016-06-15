@@ -17,7 +17,6 @@ module API
         optional :access_token, type: String, desc: 'Security token'
       end
       delete '/logout' do
-        authenticate_user!
         logout_user!
         {code: 200, status: 'success', message: 'You are logged out successfully'}
       end
