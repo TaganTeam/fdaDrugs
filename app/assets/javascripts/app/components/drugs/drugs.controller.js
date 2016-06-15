@@ -3,7 +3,9 @@
     angular
         .module('bshcPiv')
         .controller('drugsController', drugsController);
-    
+
+    drugsController.$inject = ['drugsService', '$location', '$stateParams'];
+
     function drugsController(drugsService, $location, $stateParams) {
         var vm = this;
         vm.pageChanged = pageChanged;
