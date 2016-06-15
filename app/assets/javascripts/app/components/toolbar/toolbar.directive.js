@@ -11,6 +11,8 @@
             controllerAs: 'toolbarCtrl'
         };
 
+        toolbarController.$inject = ['CONFIG', '$http', '$window'];
+
         function toolbarController(CONFIG, $http, $window) {
             var vm = this;
             vm.logout = logout;
