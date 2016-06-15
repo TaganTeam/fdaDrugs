@@ -116,6 +116,10 @@ GEM
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     hashie (3.4.4)
+    heroku_rails_deflate (1.0.3)
+      actionpack (>= 3.2.13)
+      activesupport (>= 3.2.13)
+      rack (>= 1.4.5)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -266,6 +270,7 @@ DEPENDENCIES
   grape-swagger (~> 0.8.0)
   grape-swagger-rails!
   haml-rails (~> 0.9)
+  heroku_rails_deflate
   jquery-rails
   kaminari
   pg (~> 0.15)

@@ -23,7 +23,7 @@ module BshcPiv
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
 
-    config.assets.precompile += %w( auth.css auth.js )
+
 
     config.middleware.insert_before 0, 'Rack::Cors' do
       allow do
@@ -33,5 +33,21 @@ module BshcPiv
                  methods: [:get, :post, :delete, :put, :head]
       end
     end
+    config.assets.precompile.shift
+
+    # Add additional asset pathes
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
+
+    config.assets.precompile += %w( auth.css auth.js )
+
+    # Precompile additional asset types
+    config.assets.precompile.push(Proc.new do |path|
+      File.extname(path).in? [
+                                 '.html', '.erb', '.haml',                 # Templates
+                                 '.png',  '.gif', '.jpg', '.jpeg', '.svg', # Images
+                                 '.eot',  '.otf', '.svc', '.woff', '.ttf', # Fonts
+                             ]
+    end)
   end
 end

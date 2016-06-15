@@ -34,6 +34,7 @@ group :development do
 end
 
 group :production, :staging do
+  gem 'heroku_rails_deflate'
   gem 'rails_12factor'
 end
 
