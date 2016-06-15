@@ -9,5 +9,6 @@ angular
     ])
     .constant('CONFIG',
         {
-            APIHost: 'http://localhost:3000'
+            APIDevHost: 'http://localhost:3000',
+            APIProductionHost: 'https://bshcpiv.herokuapp.com/'
         });
