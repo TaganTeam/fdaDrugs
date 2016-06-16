@@ -1,0 +1,20 @@
+/* --ngAnimation-- */
+.drugs-animate.ng-enter, .drugs-animate.ng-move{
+  transition: 0.4s all;
+  opacity: 0;
+}
+
+.drugs-animate.ng-enter.ng-enter-active, .drugs-animate.ng-move.ng-move-active{
+  opacity: 1;
+}
+
+.drugs-animate.ng-leave{
+  animation: 0.4s fade_drugs;
+}
+
+@keyframes fade_drugs {
+  from { opacity: 1 }
+  to { opacity: 0 }
+}
+
+/* --ngAnimation-- */
