@@ -13,6 +13,10 @@ class AuthController < ApplicationController
   end
 
   def redirect
-    current_user ? (redirect_to '/#/' + params[:path]) : (redirect_to login_path)
+    if current_user
+      params[:page].blank? ? (redirect_to '/#/' + params[:path]) : (redirect_to '/#/' + params[:path] + '?page=' + params[:page])
+    else
+      redirect_to login_path
+    end
   end
 end
