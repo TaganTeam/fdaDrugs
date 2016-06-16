@@ -1,8 +1,5 @@
-require 'wombat'
-
 module Scraper
-  class Drugs
-
+  class AllDrugs < BaseDrugs
     STEP_SIZE=100
 
     attr_accessor :drug_fullnames, :current_category, :start_row
@@ -48,7 +45,7 @@ module Scraper
 
     def create_drug name
       raise 'Drug name has more than one brack' if check_more_than_one_bracks(name)
-      full_name_arr = name.gsub(/\r|\n|\t/,'').gsub(/\s+/, ' ').split(' (')
+      full_name_arr = clear_name(name).split(' (')
       Drug.create(brand_name: full_name_arr[0], generic_name: full_name_arr[1].gsub(/\)$/, ''))
     rescue Exception => e
       Rails.logger.error "Scraper::Drugs ERRROR! Message: #{e}. Drug name: #{name}."

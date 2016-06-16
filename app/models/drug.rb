@@ -6,4 +6,6 @@ class Drug < ActiveRecord::Base
     t.add :brand_name
     t.add :generic_name
   end
+
+  validates :generic_name, presence: true, uniqueness: { scope: :brand_name }
 end
