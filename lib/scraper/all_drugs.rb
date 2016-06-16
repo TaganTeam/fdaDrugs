@@ -62,5 +62,24 @@ module Scraper
         @start_row += 100
       end
     end
+
+
+    def find_all_appNum
+      ary = []
+      File.open('application.txt', 'r').each_line do |line|
+        ary << line[0..6]
+      end
+      ary.shift
+      ary
+
+
+      # File.open("config/routes.rb") do |f|
+      #   f.each_line do |line|
+      #     if line =~ /root/
+      #       puts "Found root: #{line}"
+      #     end
+      #   end
+      # end
+    end
   end
 end
