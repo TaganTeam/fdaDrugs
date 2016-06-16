@@ -1,7 +1,7 @@
-module Scraper
-  require 'wombat'
-  require 'mechanize'
+require 'wombat'
+require 'mechanize'
 
+module Scraper
   class BaseDrugs
 
     private

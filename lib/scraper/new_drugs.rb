@@ -1,6 +1,6 @@
 module Scraper
   class NewDrugs < BaseDrugs
-    def parse_new
+    def parse_new_drugs
       mechanize = Mechanize.new
 
       page = mechanize.get('http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu')
