@@ -11,7 +11,7 @@ angular
             $urlRouterProvider) {
 
             $locationProvider.html5Mode(true);
-            $urlRouterProvider.otherwise('/');
+            // $urlRouterProvider.otherwise('/');
 
             $stateProvider
                 .state('drugs', {
