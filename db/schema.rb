@@ -11,21 +11,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616140909) do
+ActiveRecord::Schema.define(version: 20160617151621) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "drug_products", force: :cascade do |t|
+    t.integer  "drug_id"
+    t.string   "product_number"
+    t.string   "strength"
+    t.datetime "approval_date"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
   create_table "drugs", force: :cascade do |t|
     t.string   "brand_name"
     t.string   "generic_name"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
-    t.integer  "application_number"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "application_number"
     t.string   "dosage_form"
     t.string   "strength"
     t.string   "company"
-    t.string   "approval_date"
+    t.datetime "approval_date"
+    t.string   "product_number"
+    t.boolean  "discontinued",       default: false
   end
 
   create_table "users", force: :cascade do |t|

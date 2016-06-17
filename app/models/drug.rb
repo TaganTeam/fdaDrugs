@@ -1,4 +1,8 @@
 class Drug < ActiveRecord::Base
+
+  has_many :drug_products
+
+
   acts_as_api
 
   api_accessible :basic do |t|
@@ -7,5 +11,5 @@ class Drug < ActiveRecord::Base
     t.add :generic_name
   end
 
-  validates :generic_name, presence: true, uniqueness: { scope: :brand_name }
+  # validates :generic_name, presence: true, uniqueness: { scope: :brand_name }
 end
