@@ -1,5 +1,5 @@
 module Scraper
-  class AllDrugs < BaseDrugs
+  class AllAppNumbers < BaseDrugs
     # STEP_SIZE=100
     #
     # attr_accessor :drug_fullnames, :current_category, :start_row
@@ -45,8 +45,8 @@ module Scraper
 
 
     def parse_all_app_numbers
-      File.open('application.txt').each_with_index do |line, index|
-        create_drug(line[0..6]) unless index == 0
+      File.open('lib/scraper/data_files/application.txt').each_with_index do |line, index|
+        create_appNum(line[0..6]) unless index == 0
       end
     end
 
@@ -54,10 +54,10 @@ module Scraper
 
     private
 
-      def create_drug number
-        Drug.create(application_number: number.gsub(/\t/,'') )
+      def create_appNum number
+        DrugApplication.create(application_number: number.gsub(/\t/,'') )
       rescue Exception => e
-        Rails.logger.error "Scraper::Drugs ERRROR! Message: #{e}. Drug name: #{number}."
+        Rails.logger.error "Scraper::Drugs ERRROR! Message: #{e}. App Number: #{number}."
       end
 
     # def create_drug name

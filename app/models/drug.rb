@@ -1,7 +1,6 @@
 class Drug < ActiveRecord::Base
 
-  has_many :drug_products
-
+  has_many :drug_applications
 
   acts_as_api
 
@@ -12,4 +11,5 @@ class Drug < ActiveRecord::Base
   end
 
   # validates :generic_name, presence: true, uniqueness: { scope: :brand_name }
+  # validates :application_number, presence: true, uniqueness: { scope: :brand_name }
 end
