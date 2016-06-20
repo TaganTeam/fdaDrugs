@@ -15,7 +15,7 @@ module Scraper
         drug = save_or_find_drug(drug_details)
 
         save_drug_app(app, drug_details, drug.id)
-        save_products(app, get_products_details(products_table, app.application_number))
+        save_products(app, get_products_details(products_table, app.application_number, false))
       end
     end
 
@@ -37,36 +37,14 @@ module Scraper
       drug_details_page
     end
 
-    def get_drug_table page
-      table = page.search('#user_provided table')[4]
-      table
-    end
-
-    def get_products_table page
-      table = page.search('#user_provided table')[7]
-      table
-    end
-
-
-
-
 
     private
 
-    def save_or_find_drug drug_details
-      Drug.find_or_create_by(brand_name: drug_details[:brand_name], generic_name: drug_details[:generic_name])
-    end
 
     def save_drug_app app, attr, drug_id
       app.update_attributes(company: attr[:company], approval_date: attr[:approval_date], drug_id: drug_id)
     rescue Exception => e
         Rails.logger.error "Scraper::DrugDetails ERRROR! Message: #{e}. Drug name: #{attr[:brand_name]}."
-    end
-
-    def save_products drug_app, attr
-      drug_app.app_products.create(attr)
-    rescue Exception => e
-      Rails.logger.error "Scraper::DrugDetails ERRROR! Message: #{e}. Drug application number: #{drug_app.application_number}."
     end
   end
 end
