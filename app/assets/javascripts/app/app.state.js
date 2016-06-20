@@ -28,6 +28,18 @@ angular
                     params: {
                         page: null
                     }
+                })
+                .state('drug-detail', {
+                    url: '/drugs/:id',
+                    templateUrl: 'assets/app/components/drugs/drug-details/drug-details.tpl.html',
+                    controller: 'drugDetailsController',
+                    controllerAs: 'detailsCtrl'
+                })
+                .state('app-detail', {
+                    url: '/drugs/application/:id',
+                    templateUrl: 'assets/app/components/drugs/drug-details/drug-details.tpl.html',
+                    controller: 'drugAppController',
+                    controllerAs: 'detailsCtrl'
                 });
 
         }]);
