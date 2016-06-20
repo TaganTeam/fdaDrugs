@@ -12,7 +12,7 @@ module API
        end
 
        get do
-         drugs = Drug.all
+         drugs = Drug.all.order('brand_name')
          drugs = drugs.page(page).per(per_page)
          success! drugs.as_api_response(:basic), 200, 'success', {all_count: Drug.count}
        end
