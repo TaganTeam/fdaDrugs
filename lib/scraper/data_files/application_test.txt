@@ -1,0 +1,7 @@
+ApplNo	ApplType	SponsorApplicant	MostRecentLabelAvailableFlag	CurrentPatentFlag	ActionType	Chemical_Type	Ther_Potential	Orphan_Code
+040666	N    	PHARMICS                                          	False	False	AP
+022334	N    	LILLY                                             	False	False	AP
+000552	N    	ORGANON USA INC                                   	False	False	AP			
+000734	N    	LILLY                                             	False	F
+000793
+085928
