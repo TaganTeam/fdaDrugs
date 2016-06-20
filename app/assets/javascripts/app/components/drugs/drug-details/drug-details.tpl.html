@@ -1,0 +1,69 @@
+<div ng-if="detailsCtrl.appCollections">
+    <div class="row" style="margin-bottom: 20px; margin-top: 15px;">
+        <div class="col-md-3"><strong>Brand Name</strong></div>
+        <div class="col-md-3"><strong>Application Number</strong></div>
+        <div class="col-md-3"><strong>Company</strong></div>
+        <div class="col-md-3"><strong>Approval Ddate</strong></div>
+    </div>
+    <div class="row" ng-repeat="app in detailsCtrl.appCollections" style="margin-bottom: 10px; margin-top: 10px;">
+        <div class="col-md-3"><a href="/drugs/application/{{ app.id }}">{{ app.brand_name }}</a></div>
+        <div class="col-md-3">{{ app.application_number }}</div>
+        <div class="col-md-3">{{ app.company }}</div>
+        <div class="col-md-3">{{ app.approval_date }}</div>
+    </div>
+</div>
+
+
+<div ng-if="detailsCtrl.drugDetails">
+    <h3><ins>Drug Details</ins></h3>
+    <div class="row">
+        <div class="col-md-4">
+            <strong>Brand Name</strong>
+        </div>
+        <div class="col-md-6">
+            {{ detailsCtrl.drugDetails.brand_name }}
+        </div>
+        <div class="col-md-4">
+            <strong>Generic Name</strong>
+        </div>
+        <div class="col-md-6">
+            {{ detailsCtrl.drugDetails.generic_name }}
+        </div>
+        <div class="col-md-4">
+            <strong>Application Number</strong>
+        </div>
+        <div class="col-md-6">
+            {{ detailsCtrl.drugDetails.application_number }}
+        </div>
+        <div class="col-md-4">
+            <strong>Company</strong>
+        </div>
+        <div class="col-md-6">
+            {{ detailsCtrl.drugDetails.company }}
+        </div>
+        <div class="col-md-4">
+            <strong>Approval Date</strong>
+        </div>
+        <div class="col-md-6">
+            {{ detailsCtrl.drugDetails.approval_date | date:"MMM d, y" }}
+        </div>
+    </div>
+
+    <h3><ins>Products</ins></h3>
+
+    <div class="row" style="margin-bottom: 10px; margin-top: 25px;">
+        <div class="col-md-2"><strong>Brand Name</strong></div>
+        <div class="col-md-2"><strong>Generic Name</strong></div>
+        <div class="col-md-2"><strong>Strength</strong></div>
+        <div class="col-md-2"><strong>Dosage Form/Route</strong></div>
+        <div class="col-md-2"><strong>Market Status</strong></div>
+    </div>
+
+    <div class="row" ng-repeat="product in detailsCtrl.drugDetails.products">
+        <div class="col-md-2">{{ detailsCtrl.drugDetails.brand_name }}</div>
+        <div class="col-md-2">{{ detailsCtrl.drugDetails.generic_name }}</div>
+        <div class="col-md-2">{{ product.strength }}</div>
+        <div class="col-md-2">{{ product.dosage }}</div>
+        <div class="col-md-2">{{ product.market_status }}</div>
+    </div>
+</div>
