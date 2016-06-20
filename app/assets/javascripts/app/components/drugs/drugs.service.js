@@ -14,7 +14,7 @@
         };
 
         function getDrugs(page) {
-            return  $http.get(CONFIG.APIDevHost + '/api/v1/drugs', {
+            return  $http.get(CONFIG.APIProductionHost + '/api/v1/drugs', {
                 params:{
                     page: page
                 }
@@ -22,11 +22,11 @@
         }
         
         function getDrugDetails(drugId) {
-            return  $http.get(CONFIG.APIDevHost + '/api/v1/drugs/' + drugId)
+            return  $http.get(CONFIG.APIProductionHost + '/api/v1/drugs/' + drugId)
         }
 
         function getAppDetails(appId) {
-            return  $http.get(CONFIG.APIDevHost + '/api/v1/drugs/application/' + appId)
+            return  $http.get(CONFIG.APIProductionHost + '/api/v1/drugs/application/' + appId)
         }
 
     }
