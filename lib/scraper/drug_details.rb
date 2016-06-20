@@ -43,6 +43,7 @@ module Scraper
 
     def save_drug_app app, attr, drug_id
       app.update_attributes(company: attr[:company], approval_date: attr[:approval_date], drug_id: drug_id)
+      p "#{app.application_number}--saved"
     rescue Exception => e
         Rails.logger.error "Scraper::DrugDetails ERRROR! Message: #{e}. Drug name: #{attr[:brand_name]}."
     end
