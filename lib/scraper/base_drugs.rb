@@ -26,7 +26,17 @@ module Scraper
       search_results
     end
 
-    def get_products_details products_table, appl_no
+    def get_drug_table page
+      table = page.search('#user_provided table')[4]
+      table
+    end
+
+    def get_products_table page
+      table = page.search('#user_provided table')[7]
+      table
+    end
+
+    def get_products_details products_table, appl_no, new_drug
       ary = []
       products_table.search('tr').each_with_index do |row, i|
         products = {}
@@ -41,26 +51,41 @@ module Scraper
               products[:market_status] = item.text
           end
         end
-        products[:product_number] = get_product_number(i, appl_no)
+        products[:product_number] = get_product_number(i, appl_no, new_drug)
         ary << products
       end
       ary.shift
       ary
     end
 
-    def get_product_number index, appl_no
-      ary = []
-      File.open("lib/scraper/data_files/Product.txt") do |f|
-        f.each_line do |line|
-          if line.match(/#{appl_no}/)
-            ary << line.gsub(/\r|\n|\t/,'')[6..8]
+    def get_product_number index, appl_no, new_drug
+      if new_drug
+        "0#{index < 9 ? '0' : index + 1}#{index}"
+
+      else
+        ary = []
+        File.open("lib/scraper/data_files/Product.txt") do |f|
+          f.each_line do |line|
+            if line.match(/#{appl_no}/)
+              ary << line.gsub(/\r|\n|\t/,'')[6..8]
+            end
           end
         end
+        ary[index-1]
       end
-      ary[index-1]
     end
 
     private
+
+    def save_or_find_drug drug_details
+      Drug.find_or_create_by(brand_name: drug_details[:brand_name], generic_name: drug_details[:generic_name])
+    end
+
+    def save_products drug_app, attr
+      drug_app.app_products.create(attr)
+    rescue Exception => e
+      Rails.logger.error "Scraper::DrugDetails ERRROR! Message: #{e}. Drug application number: #{drug_app.application_number}."
+    end
 
     def clear_name name
       name.gsub(/\r|\n|\t/,'').gsub(/\s+/, ' ')

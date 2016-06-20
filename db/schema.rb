@@ -38,9 +38,8 @@ ActiveRecord::Schema.define(version: 20160618190741) do
   create_table "drugs", force: :cascade do |t|
     t.string   "brand_name"
     t.string   "generic_name"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.boolean  "discontinued", default: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|
