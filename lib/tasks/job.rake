@@ -32,15 +32,15 @@ namespace :job do
     p 'done'
   end
 
-  task parse_new_drugs: :environment do
-    p 'start'
-    Scraper::NewDrugs.new.parse_new_drugs
-    p 'done'
-  end
-
   task parse_patents_exclusivities: :environment do
     p 'start'
     Scraper::Patents.new.parse_patents_exclusivities
+    p 'done'
+  end
+
+  task parse_new_drugs: :environment do
+    p 'start'
+    Scraper::NewDrugs.new.parse_new_drugs
     p 'done'
   end
 

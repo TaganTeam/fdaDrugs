@@ -39,8 +39,9 @@ ActiveRecord::Schema.define(version: 20160621132704) do
   create_table "drugs", force: :cascade do |t|
     t.string   "brand_name"
     t.string   "generic_name"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "discontinued", default: false
   end
 
   create_table "exclusivities", force: :cascade do |t|
