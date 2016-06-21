@@ -36,6 +36,16 @@ module Scraper
       table
     end
 
+    def get_patents_table page
+      table = page.search('#user_provided table')[0]
+      table
+    end
+
+    def get_exclusivity_table page
+      table = page.search('#user_provided table')[1]
+      table
+    end
+
     def get_products_details products_table, appl_no, new_drug
       ary = []
       products_table.search('tr').each_with_index do |row, i|
