@@ -30,7 +30,7 @@ module Scraper
           search_results[:patent_expiration] = row.search('td')[3].text.strip
           search_results[:drug_substance_claim] = row.search('td')[4].text.strip
           search_results[:drug_product_claim] = row.search('td')[5].text.strip
-          search_results[:patent_use_code] = clear_name(row.search('td')[6].text)
+          search_results[:patent_code_id] = PatentCode.find_by_code(clear_name(row.search('td')[6].text)).id rescue nil
           search_results[:delist_requested] = clear_name(row.search('td')[7].text)
         end
         ary << search_results
@@ -45,7 +45,7 @@ module Scraper
       table.search('tr').each_with_index do |row, i|
         search_results = {}
         unless i == 0
-          search_results[:exclusivity_code] = clear_name(row.search('td')[2].text)
+          search_results[:exclusivity_code_id] = ExclusivityCode.find_by_code(clear_name(row.search('td')[2].text)).id rescue nil
           search_results[:exclusivity_expiration] = row.search('td')[3].text.strip
         end
         ary << search_results
