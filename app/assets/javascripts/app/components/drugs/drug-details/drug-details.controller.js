@@ -12,13 +12,10 @@
         drugsService.getDrugDetails($stateParams.id).then(function (response) {
                         
             if (Array.isArray(response.data.data)){
-
                 vm.appCollections = response.data.data;
-                console.log(vm.appCollections)
 
             } else {
                 vm.drugDetails = response.data.data;
-                console.log(vm.drugDetails)
             }
         })
         
