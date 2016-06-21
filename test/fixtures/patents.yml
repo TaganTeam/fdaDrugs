@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  patent_no: MyString
+  patent_expiration: 2016-06-21 11:36:33
+  drug_substance_claim: MyString
+
+two:
+  patent_no: MyString
+  patent_expiration: 2016-06-21 11:36:33
+  drug_substance_claim: MyString

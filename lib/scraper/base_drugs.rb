@@ -4,6 +4,8 @@ require 'mechanize'
 module Scraper
   class BaseDrugs
 
+    attr_accessor :status
+
     def get_data_page url
       mechanize = Mechanize.new
       page = mechanize.get(url)
@@ -62,6 +64,7 @@ module Scraper
           end
         end
         products[:product_number] = get_product_number(i, appl_no, new_drug)
+        products[:patent_status] = get_patent_status(appl_no, products[:product_number])
         ary << products
       end
       ary.shift
@@ -85,6 +88,11 @@ module Scraper
       end
     end
 
+    def get_patent_status appl_no, product_number
+      page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product_number}&table1=OB_Rx")
+      get_patents_table(page).nil? ? 0 : 1
+    end
+
     private
 
     def save_or_find_drug drug_details
@@ -98,7 +106,7 @@ module Scraper
     end
 
     def clear_name name
-      name.gsub(/\r|\n|\t/,'').gsub(/\s+/, ' ')
+      name.gsub(/\r|\n|\t/,'').gsub(/\s+/, '')
     end
 
   end
