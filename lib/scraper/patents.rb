@@ -2,7 +2,6 @@ module Scraper
   class Patents < BaseDrugs
 
     def parse_patents_exclusivities
-      # DrugApplication.where(application_number: '022334').each do |app|
       DrugApplication.all.each do |app|
         app.app_products.where(patent_status: true).each do |product|
           page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{app.application_number}&Product_No=#{product.product_number}&table1=OB_Rx")
