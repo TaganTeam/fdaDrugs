@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160621115350) do
+ActiveRecord::Schema.define(version: 20160621132704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,19 +45,33 @@ ActiveRecord::Schema.define(version: 20160621115350) do
 
   create_table "exclusivities", force: :cascade do |t|
     t.integer  "app_product_id"
-    t.string   "exclusivity_code"
+    t.integer  "exclusivity_code_id"
     t.datetime "exclusivity_expiration"
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
 
+  create_table "exclusivity_codes", force: :cascade do |t|
+    t.string   "code"
+    t.string   "definition"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "patent_codes", force: :cascade do |t|
+    t.string   "code"
+    t.string   "definition"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "patents", force: :cascade do |t|
     t.integer  "app_product_id"
+    t.integer  "patent_code_id"
     t.string   "number"
     t.datetime "patent_expiration"
     t.string   "drug_substance_claim"
     t.string   "drug_product_claim"
-    t.string   "patent_use_code"
     t.string   "delist_requested"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false

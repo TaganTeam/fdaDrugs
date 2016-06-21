@@ -59,7 +59,10 @@ gem 'kaminari'
 # XML/JSON API responses
 gem 'acts_as_api', '~> 0.4.2'
 
+# Parse web and xlx
 gem 'wombat', '~> 2.5', '>= 2.5.1'
+gem 'roo', '~> 2.4.0'
+gem 'roo-xls'
 
 gem 'delayed_job_active_record'
 gem 'clockwork'

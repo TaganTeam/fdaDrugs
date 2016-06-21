@@ -3,12 +3,26 @@ require 'scraper/all_app_numbers'
 require 'scraper/drug_details'
 require 'scraper/new_drugs'
 require 'scraper/patents'
+require 'scraper/exclusivity_codes'
+require 'scraper/patent_use_codes'
 
 
 namespace :job do
   task parse_app_numbers: :environment do
     p 'start'
     Scraper::AllAppNumbers.new.parse_all_app_numbers
+    p 'done'
+  end
+
+  task parse_exclusivity_codes: :environment do
+    p 'start'
+    Scraper::ExclusivityCodes.new.parse_exclusivity_codes
+    p 'done'
+  end
+
+  task parse_patent_codes: :environment do
+    p 'start'
+    Scraper::PatentUseCodes.new.parse_patent_codes
     p 'done'
   end
 
