@@ -30,14 +30,26 @@ module Scraper
 
       sleep 0.5
 
-      if new_page.at('#user_provided table td.product_table a').nil?
+      if is_drug_details? new_page
         drug_details_page = new_page
       else
-        text = new_page.at('#user_provided table td.product_table a').text
-        link = new_page.link_with(text: text)
-        drug_details_page = link.click
+        some_page = get_another_page(new_page)
+
+        drug_details_page = is_drug_details?(some_page) ? some_page : get_another_page(some_page)
       end
       drug_details_page
+    end
+
+    def is_drug_details? page
+      page.at('#user_provided table td.product_table a').nil?
+    end
+
+    def get_another_page page
+      sleep 0.5
+      text = page.at('#user_provided table td.product_table a').text
+      link = page.link_with(text: text)
+      some_page = link.click
+      some_page
     end
 
 
