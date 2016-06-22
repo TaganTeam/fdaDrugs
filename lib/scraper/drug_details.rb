@@ -11,6 +11,7 @@ module Scraper
         drug_table = get_drug_table(details_page)
         products_table = get_products_table(details_page)
 
+
         drug_details = get_drug_details(drug_table)
         drug = save_or_find_drug(drug_details)
 
@@ -26,6 +27,7 @@ module Scraper
       form['searchTerm'] = appl_no
       new_page = form.submit
 
+      sleep 0.5
 
       if new_page.at('#user_provided table td.product_table a').nil?
         drug_details_page = new_page

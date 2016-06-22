@@ -7,6 +7,7 @@ module Scraper
     attr_accessor :status
 
     def get_data_page url
+      sleep 0.5
       mechanize = Mechanize.new
       page = mechanize.get(url)
       page
@@ -89,6 +90,7 @@ module Scraper
     end
 
     def get_patent_status appl_no, product_number
+      sleep 0.5
       page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product_number}&table1=OB_Rx")
       get_patents_table(page).nil? ? 0 : 1
     end

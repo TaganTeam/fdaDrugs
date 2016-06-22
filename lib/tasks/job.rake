@@ -8,6 +8,9 @@ require 'scraper/patent_use_codes'
 
 
 namespace :job do
+
+  # ------ Parse from FILE------ #
+
   task parse_app_numbers: :environment do
     p 'start'
     Scraper::AllAppNumbers.new.parse_all_app_numbers
@@ -26,6 +29,9 @@ namespace :job do
     p 'done'
   end
 
+  # ------ Parse from FILE------ #
+
+  # ------ Parse from SITE------ #
   task parse_drug_details: :environment do
     p 'start'
     Scraper::DrugDetails.new.parse_drugs
@@ -43,5 +49,6 @@ namespace :job do
     Scraper::NewDrugs.new.parse_new_drugs
     p 'done'
   end
+  # ------ Parse from SITE------ #
 
 end

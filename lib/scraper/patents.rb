@@ -6,8 +6,6 @@ module Scraper
         app.app_products.where(patent_status: true).each do |product|
           page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{app.application_number}&Product_No=#{product.product_number}&table1=OB_Rx")
 
-
-          parse_pates
           patents_table = get_patents_table(page)
           exclusivity_table = get_exclusivity_table(page)
 
