@@ -23,6 +23,7 @@ module Scraper
     def get_drug_details_page appl_no
       page = get_data_page('https://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm')
 
+      sleep 1
       form = page.form('displaysearch')
       form['searchTerm'] = appl_no
       new_page = form.submit
