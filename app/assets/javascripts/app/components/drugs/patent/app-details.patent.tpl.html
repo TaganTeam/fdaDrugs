@@ -1,0 +1,50 @@
+<h3><ins>Patent and Exclusivity Data</ins> for product: {{ patentCtrl.productNumber }}</h3>
+
+<table class="table table-condensed table-hover">
+    <thead>
+        <tr>
+            <th>Patent No</th>
+            <th>Patent Expiration</th>
+            <th>Drug Substance Claim</th>
+            <th>Drug Product Claim</th>
+            <th>Patent Use Code</th>
+            <th>Delist Requested</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="patent in patentCtrl.patents">
+            <td>{{ patent.number }}</td>
+            <td>{{ patent.patent_expiration | date:"MMM d, y" }}</td>
+            <td>{{ patent.drug_substance_claim }}</td>
+            <td>{{ patent.drug_product_claim }}</td>
+            <td>
+                <a style="cursor: pointer"
+                   ng-click="patentCtrl.patentCodeInfo(patent.patent_code_id)">
+                    {{ patent.patent_code }}
+                </a>
+            </td>
+            <td>{{ patent.delist_requested }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<table class="table table-condensed table-hover">
+    <thead>
+    <tr>
+        <th>Exclusivity code</th>
+        <th>Exclusivity Expiration</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="exclusive in patentCtrl.exclusivities">
+        <td>
+            <a style="cursor: pointer"
+               ng-click="patentCtrl.exclusiveCodeInfo(exclusive.exclusivity_code_id)">
+                {{ exclusive.exclusivity_code }}
+            </a>
+        </td>
+
+        <td>{{ exclusive.exclusivity_expiration | date:"MMM d, y" }}</td>
+    </tr>
+    </tbody>
+</table>

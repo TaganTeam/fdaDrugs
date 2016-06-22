@@ -41,7 +41,6 @@ ActiveRecord::Schema.define(version: 20160621132704) do
     t.string   "generic_name"
     t.datetime "created_at",                   null: false
     t.datetime "updated_at",                   null: false
-    t.boolean  "discontinued", default: false
   end
 
   create_table "exclusivities", force: :cascade do |t|

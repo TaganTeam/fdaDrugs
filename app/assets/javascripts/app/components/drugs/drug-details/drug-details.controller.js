@@ -4,9 +4,9 @@
         .module('bshcPiv')
         .controller('drugDetailsController', drugDetailsController);
 
-    drugDetailsController.$inject = ['drugsService', '$stateParams'];
+    drugDetailsController.$inject = ['drugsService', '$stateParams', '$state'];
     
-    function drugDetailsController(drugsService, $stateParams) {
+    function drugDetailsController(drugsService, $stateParams, $state) {
         var vm = this;
 
         drugsService.getDrugDetails($stateParams.id).then(function (response) {
@@ -16,8 +16,11 @@
 
             } else {
                 vm.drugDetails = response.data.data;
+                $state.go('app-detail', {
+                   id: vm.drugDetails.id
+                });
             }
-        })
+        });
         
         
     }
