@@ -52,6 +52,58 @@ module API
          end
        end
 
+       desc "Return patent details"
+       params do
+         # requires :id, type: Integer, desc: 'Application id'
+         requires :product_id, type: Integer, desc: 'Product id'
+         optional :access_token, type: String, desc: 'User access token'
+       end
+       get '/application/:id/patent/:product_id' do
+         begin
+           info = []
+           product = AppProduct.find_by_id params[:product_id]
+           info << product.patents
+           info << product.exclusivities
+
+           success! info.as_api_response(:basic), 200
+
+         rescue => e
+           throw_error! 403, e.class.to_s, e.message
+         end
+       end
+
+       desc "Return patent code details"
+       params do
+         requires :id, type: Integer, desc: 'Patent code id'
+         optional :access_token, type: String, desc: 'User access token'
+       end
+       get '/patent-code/:id' do
+         begin
+           patent_code = PatentCode.find_by_id params[:id]
+
+           success! patent_code.as_api_response(:basic), 200
+
+         rescue => e
+           throw_error! 403, e.class.to_s, e.message
+         end
+       end
+
+       desc "Return Exclusivity code details"
+       params do
+         requires :id, type: Integer, desc: 'Patent code id'
+         optional :access_token, type: String, desc: 'User access token'
+       end
+       get '/exclusivity-code/:id' do
+         begin
+           exclusivity_code = ExclusivityCode.find_by_id params[:id]
+
+           success! exclusivity_code.as_api_response(:basic), 200
+
+         rescue => e
+           throw_error! 403, e.class.to_s, e.message
+         end
+       end
+
 
 
      end

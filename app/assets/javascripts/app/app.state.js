@@ -39,7 +39,20 @@ angular
                     url: '/drugs/application/:id',
                     templateUrl: 'assets/app/components/drugs/drug-details/drug-details.tpl.html',
                     controller: 'drugAppController',
-                    controllerAs: 'detailsCtrl'
+                    controllerAs: 'detailsCtrl',
+                    params: {
+                        id: null
+                    }
+                })
+                .state('app-detail.patent', {
+                    url: '/patent/:productId',
+                    templateUrl: 'assets/app/components/drugs/patent/app-details.patent.tpl.html',
+                    controller: 'patentController',
+                    controllerAs: 'patentCtrl',
+                    params: {
+                        productId: null,
+                        productNumber: null
+                    }
                 });
 
         }]);

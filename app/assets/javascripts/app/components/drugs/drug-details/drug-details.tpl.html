@@ -59,19 +59,38 @@
 
     <h3><ins>Products</ins></h3>
 
-    <div class="row" style="margin-bottom: 10px; margin-top: 25px;">
-        <div class="col-md-2"><strong>Brand Name</strong></div>
-        <div class="col-md-2"><strong>Generic Name</strong></div>
-        <div class="col-md-2"><strong>Strength</strong></div>
-        <div class="col-md-2"><strong>Dosage Form/Route</strong></div>
-        <div class="col-md-2"><strong>Market Status</strong></div>
-    </div>
+    <table class="table table-condensed table-hover">
+        <thead>
+            <tr>
+                <th>Brand Name</th>
+                <th>Generic Name</th>
+                <th>Strength</th>
+                <th>Dosage Form/Route</th>
+                <th>Market Status</th>
+                <th>Patent Info</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="product in detailsCtrl.drugDetails.products"
+                ng-class="{'success': detailsCtrl.isActive(product) }">
 
-    <div class="row" ng-repeat="product in detailsCtrl.drugDetails.products">
-        <div class="col-md-2">{{ detailsCtrl.drugDetails.brand_name }}</div>
-        <div class="col-md-2">{{ detailsCtrl.drugDetails.generic_name }}</div>
-        <div class="col-md-2">{{ product.strength }}</div>
-        <div class="col-md-2">{{ product.dosage }}</div>
-        <div class="col-md-2">{{ product.market_status }}</div>
-    </div>
+                <td>{{ detailsCtrl.drugDetails.brand_name }}</td>
+                <td>{{ detailsCtrl.drugDetails.generic_name }}</td>
+                <td>{{ product.strength }}</td>
+                <td>{{ product.dosage }}</td>
+                <td>{{ product.market_status }}</td>
+
+                <td ng-if="product.patent_status">
+                    <a style="cursor: pointer"
+                       ng-click="detailsCtrl.openPatentInfo(product.id, product.product_number, product)">
+                    Patent info
+                </a>
+                </td>
+
+                <td ng-if="!product.patent_status">No info</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ui-view></ui-view>
 </div>

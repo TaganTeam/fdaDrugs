@@ -23,7 +23,7 @@ class DrugApplication < ActiveRecord::Base
   end
 
   api_accessible :full_single, extend: :basic do |t|
-    t.add lambda{ |app| app.app_products.as_api_response(:basic) rescue nil }, as: :products
+    t.add lambda{ |app| app.app_products.order('id').as_api_response(:basic) rescue nil }, as: :products
   end
 
 
