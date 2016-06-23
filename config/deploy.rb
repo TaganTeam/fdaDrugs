@@ -25,7 +25,8 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 set :bower_flags, '--quiet --config.interactive=false'
 set :bower_roles, :web
 set :bower_target_path, "#{release_path}"
-set :bower_bin, :bower
+set :bower_bin, '/usr/local/node/node-default/bin/bower'
+# set :bower_bin, :bower
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
