@@ -18,7 +18,7 @@ module Scraper
           save_new_drug_app(new_app_data, drug.id)
           new_product_data = get_products_details(new_products_table, @app.application_number, true)
           save_products(@app, new_product_data)
-          save_patent_exclusivity_for(@app, new_product_data[0][:product_number])
+          save_patent_exclusivity_for(@app.application_number, new_product_data[0][:product_number])
         end
       end
     end

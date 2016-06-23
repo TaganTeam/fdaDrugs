@@ -8,8 +8,8 @@ module Scraper
       DrugApplication.all.each do |app|
         details_page = get_drug_details_page(app.application_number)
 
-        drug_table = get_drug_table(details_page)
-        products_table = get_products_table(details_page)
+        drug_table = get_target_table(details_page, 4)
+        products_table = get_target_table(details_page, 7)
 
 
         drug_details = get_drug_details(drug_table)
