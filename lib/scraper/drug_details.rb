@@ -8,19 +8,24 @@ module Scraper
       DrugApplication.all.each do |app|
         details_page = get_drug_details_page(app.application_number)
 
-        drug_table = get_target_table(details_page, 4)
-        products_table = get_target_table(details_page, 7)
+        p "--details_page--#{details_page}"
 
+        if details_page.present?
 
-        drug_details = get_drug_details(drug_table)
-        drug = save_or_find_drug(drug_details)
+          drug_table = get_target_table(details_page, 4)
+          products_table = get_target_table(details_page, 7)
 
-        save_drug_app(app, drug_details, drug.id)
-        save_products(app, get_products_details(products_table, app.application_number, false))
+          drug_details = get_drug_details(drug_table)
+          drug = save_or_find_drug(drug_details)
+
+          save_drug_app(app, drug_details, drug.id)
+          save_products(app, get_products_details(products_table, app.application_number, false))
+        end
       end
     end
 
-    def get_drug_details_page appl_no
+    def get_drug_details_page appl_no, attempt=1
+      p "---attempt--#{attempt}"
       page = get_data_page('https://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm')
 
       sleep 1
@@ -30,26 +35,26 @@ module Scraper
 
       sleep 0.5
 
-      if is_drug_details? new_page
+      if new_page.at('#user_provided table td.product_table a').nil?
         drug_details_page = new_page
       else
-        some_page = get_another_page(new_page)
-
-        drug_details_page = is_drug_details?(some_page) ? some_page : get_another_page(some_page)
+        text = new_page.at('#user_provided table td.product_table a').text
+        link = new_page.link_with(text: text)
+        drug_details_page = link.click
       end
       drug_details_page
-    end
 
-    def is_drug_details? page
-      page.at('#user_provided table td.product_table a').nil?
-    end
+    rescue Exception => e
+      Rails.logger.error "Scraper::DrugDetails ERRROR! Message: #{e}. Application number #{appl_no}"
 
-    def get_another_page page
-      sleep 0.5
-      text = page.at('#user_provided table td.product_table a').text
-      link = page.link_with(text: text)
-      some_page = link.click
-      some_page
+      if attempt >= 5
+        Rails.logger.error "Scraper::DrugDetails ERRROR! Message: #{e}. Application number #{appl_no}. Attempt more than 5. Application was skipped."
+        false
+      else
+        attempt += 1
+        sleep 0.5
+        get_drug_details_page appl_no, attempt
+      end
     end
 
 
