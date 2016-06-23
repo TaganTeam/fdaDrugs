@@ -50,7 +50,7 @@ module Scraper
           end
         end
         products[:product_number] = get_product_number(i, appl_no, new_drug)
-        products[:patent_status] = get_patent_status(appl_no, products[:product_number])
+        products[:patent_status] = get_patent_status(appl_no, products[:product_number], products[:market_status])
         ary << products
       end
       ary.shift
@@ -74,24 +74,32 @@ module Scraper
       end
     end
 
-    def get_patent_status appl_no, product_number
+    def get_patent_status appl_no, product_number, market_status
       sleep 0.5
-      page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product_number}&table1=OB_Rx")
+      list = get_patent_list market_status
+      page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product_number}&table1=#{list}")
       get_target_table(page, 0).nil? ? 0 : 1
     end
 
 
-    def save_patent_exclusivity_for appl_no, product_number
-      page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product_number}&table1=OB_Rx")
+    def save_patent_exclusivity_for appl_no, product
+      list = get_patent_list product.market_status
+      p "http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product.product_number}&table1=#{list}"
+      page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product.product_number}&table1=#{list}")
 
       patents_table = get_target_table(page, 0)
+
+      unless patents_table.nil?
+        patents_data = get_patents_data(patents_table)
+        save_patents_data(product, patents_data)
+      end
+
       exclusivity_table = get_target_table(page, 1)
 
-      patents_data = get_patents_data(patents_table)
-      exclusivity_data = get_exclusivity_data(exclusivity_table)
-
-      save_patents_data(product, patents_data)
-      save_exclusivity_data(product, exclusivity_data)
+      unless exclusivity_table.nil?
+        exclusivity_data = get_exclusivity_data(exclusivity_table)
+        save_exclusivity_data(product, exclusivity_data)
+      end
     end
 
 
@@ -127,6 +135,18 @@ module Scraper
       end
       ary.shift
       ary
+    end
+
+    def get_patent_list market_status
+      case market_status
+        when "Prescription "
+          list = 'OB_Rx'
+        when "Discontinued "
+          list = 'OB_Disc'
+        else
+          list = 'OB_OTC'
+      end
+      list
     end
 
 

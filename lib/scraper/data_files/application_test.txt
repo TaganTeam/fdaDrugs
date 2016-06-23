@@ -5,3 +5,7 @@ ApplNo	ApplType	SponsorApplicant	MostRecentLabelAvailableFlag	CurrentPatentFlag	
 000734	N    	LILLY                                             	False	F
 000793
 085928
+022251  OB_Rx
+050795  OB_Rx
+021410  DISC
+021700  DISC
