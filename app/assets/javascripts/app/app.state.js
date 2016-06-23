@@ -16,13 +16,13 @@ angular
             $stateProvider
                 .state('drugs', {
                     url: '/',
-                    templateUrl: '/components/drugs/drugs.tpl.html',
+                    templateUrl: 'components/drugs/drugs.tpl.html',
                     controller: 'drugsController',
                     controllerAs: 'drugsCtrl'
                 })
                 .state('paging', {
                     url: '/drugs?page',
-                    templateUrl: '/components/drugs/drugs.tpl.html',
+                    templateUrl: 'components/drugs/drugs.tpl.html',
                     controller: 'drugsController',
                     controllerAs: 'drugsCtrl',
                     params: {
@@ -31,7 +31,7 @@ angular
                 })
                 .state('drug-detail', {
                     url: '/drugs/:id',
-                    templateUrl: '/components/drugs/drug-details/drug-details.tpl.html',
+                    templateUrl: 'components/drugs/drug-details/drug-details.tpl.html',
                     controller: 'drugDetailsController',
                     controllerAs: 'detailsCtrl'
                 })
