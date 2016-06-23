@@ -5,7 +5,7 @@ module Scraper
 
 
     def parse_all_app_numbers
-      File.open('lib/scraper/data_files/application_test.txt').each_with_index do |line, index|
+      File.open('lib/scraper/data_files/application.txt').each_with_index do |line, index|
         create_appNum(clear_name(line[0..6])) unless index == 0
       end
     end
