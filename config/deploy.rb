@@ -24,8 +24,9 @@ set :puma_worker_timeout, nil
 set :puma_init_active_record, true  # Change to false when not using ActiveRecord
 set :bower_flags, '--quiet --config.interactive=false'
 set :bower_roles, :web
-set :bower_target_path, "#{release_path}"
+set :bower_target_path, lambda {"#{release_path}"}
 set :bower_bin, :bower
+set :linked_files, %w{config/database.yml config/secrets.yml}
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master

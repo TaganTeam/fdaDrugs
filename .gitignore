@@ -13,5 +13,6 @@
 /tmp
 .idea
 .DS_Store
-#/config/database.yml
+/config/database.yml
+/config/secrets.yml
 /vendor/assets/bower_components
