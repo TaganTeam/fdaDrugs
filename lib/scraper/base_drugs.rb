@@ -99,7 +99,9 @@ module Scraper
         save_patents_data(product, patents_data)
       else
 
-        if get_patents_data(first_table, false).empty?
+
+
+        if get_patents_data(first_table, false).present?
           exclusivity_data = get_exclusivity_data(first_table)
           save_exclusivity_data(product, exclusivity_data)
         else
