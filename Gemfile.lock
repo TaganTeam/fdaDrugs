@@ -50,6 +50,10 @@ GEM
       rack (>= 1.1.0)
     airbrussh (1.0.2)
       sshkit (>= 1.6.1, != 1.7.0)
+    angular-rails-templates (1.0.0)
+      railties (>= 4.2, < 6)
+      sprockets (~> 3.0)
+      tilt
     arel (6.0.3)
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -139,10 +143,6 @@ GEM
       html2haml (>= 1.0.1)
       railties (>= 4.0.1)
     hashie (3.4.4)
-    heroku_rails_deflate (1.0.3)
-      actionpack (>= 3.2.13)
-      activesupport (>= 3.2.13)
-      rack (>= 1.4.5)
     html2haml (2.0.0)
       erubis (~> 2.7.0)
       haml (~> 4.0.0)
@@ -217,11 +217,6 @@ GEM
       rails-deprecated_sanitizer (>= 1.0.1)
     rails-html-sanitizer (1.0.3)
       loofah (~> 2.0)
-    rails_12factor (0.0.3)
-      rails_serve_static_assets
-      rails_stdout_logging
-    rails_serve_static_assets (0.0.5)
-    rails_stdout_logging (0.0.5)
     railties (4.2.6)
       actionpack (= 4.2.6)
       activesupport (= 4.2.6)
@@ -301,6 +296,7 @@ PLATFORMS
 
 DEPENDENCIES
   acts_as_api (~> 0.4.2)
+  angular-rails-templates
   byebug
   capistrano
   capistrano-bower
@@ -317,14 +313,12 @@ DEPENDENCIES
   grape-swagger (~> 0.8.0)
   grape-swagger-rails!
   haml-rails (~> 0.9)
-  heroku_rails_deflate
   jquery-rails
   kaminari
   pg (~> 0.15)
   puma
   rack-cors
   rails (= 4.2.6)
-  rails_12factor
   roo (~> 2.4.0)
   roo-xls
   sass-rails (~> 5.0)
