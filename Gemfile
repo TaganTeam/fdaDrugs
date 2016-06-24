@@ -33,10 +33,10 @@ group :development do
   gem 'spring'
 end
 
-group :production, :staging do
-  gem 'heroku_rails_deflate'
-  gem 'rails_12factor'
-end
+# group :production, :staging do
+#   gem 'heroku_rails_deflate'
+#   gem 'rails_12factor'
+# end
 
 group :development do
   gem 'capistrano',         require: false
@@ -48,6 +48,8 @@ group :development do
 end
 
 gem 'puma'
+
+gem 'angular-rails-templates'
 
 
 # Haml as the templating engine for Rails
