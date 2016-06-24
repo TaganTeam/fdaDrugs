@@ -87,34 +87,45 @@ module Scraper
       p "http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product.product_number}&table1=#{list}"
       page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product.product_number}&table1=#{list}")
 
-      patents_table = get_target_table(page, 0)
 
-      unless patents_table.nil?
-        patents_data = get_patents_data(patents_table)
-        save_patents_data(product, patents_data)
-      end
+      first_table = get_target_table(page, 0)
+      second_table = get_target_table(page, 1)
 
-      exclusivity_table = get_target_table(page, 1)
-
-      unless exclusivity_table.nil?
-        exclusivity_data = get_exclusivity_data(exclusivity_table)
+      unless second_table.nil?
+        exclusivity_data = get_exclusivity_data(second_table)
         save_exclusivity_data(product, exclusivity_data)
+
+        patents_data = get_patents_data(first_table, false)
+        save_patents_data(product, patents_data)
+      else
+
+        if get_patents_data(first_table, false).empty?
+          exclusivity_data = get_exclusivity_data(first_table)
+          save_exclusivity_data(product, exclusivity_data)
+        else
+          patents_data = get_patents_data(first_table, false)
+          save_patents_data(product, patents_data)
+        end
       end
     end
 
 
-    def get_patents_data table
+    def get_patents_data table, is_update
       ary = []
 
       table.search('tr').each_with_index do |row, i|
         search_results = {}
         unless i == 0
-          search_results[:number] = row.search('td')[2].text
-          search_results[:patent_expiration] = row.search('td')[3].text.strip
-          search_results[:drug_substance_claim] = row.search('td')[4].text.strip
-          search_results[:drug_product_claim] = row.search('td')[5].text.strip
-          search_results[:patent_code_id] = PatentCode.find_by_code(clear_name(row.search('td')[6].text)).id rescue nil
-          search_results[:delist_requested] = clear_name(row.search('td')[7].text)
+          if is_update
+            search_results[:app_number] = clear_name(row.search('td')[0].text).strip
+            search_results[:product_number] = clear_name(row.search('td')[1].text).strip
+          end
+          search_results[:number] = row.search('td')[ is_update ? 3 : 2].text
+          search_results[:patent_expiration] = row.search('td')[is_update ? 4 : 3].text.strip
+          search_results[:drug_substance_claim] = row.search('td')[is_update ? 5 : 4].text.strip
+          search_results[:drug_product_claim] = row.search('td')[is_update ? 6 : 5].text.strip
+          search_results[:patent_code_id] = PatentCode.find_by_code(clear_name(row.search('td')[is_update ? 7 : 6].text)).id rescue nil
+          search_results[:delist_requested] = clear_name(row.search('td')[is_update ? 8 : 7].text)
         end
         ary << search_results
       end

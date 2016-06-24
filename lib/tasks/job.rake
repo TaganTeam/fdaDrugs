@@ -5,6 +5,7 @@ require 'scraper/new_drugs'
 require 'scraper/patents'
 require 'scraper/exclusivity_codes'
 require 'scraper/patent_use_codes'
+require 'scraper/patents_update'
 
 
 namespace :job do
@@ -49,6 +50,15 @@ namespace :job do
     Scraper::NewDrugs.new.parse_new_drugs
     p 'done'
   end
+
+  task update_patents: :environment do
+    p 'start'
+    Scraper::PatentsUpdate.new.parse_update_patens
+    p 'done'
+  end
+
+
+
   # ------ Parse from SITE------ #
 
 end

@@ -1,4 +1,5 @@
 //= require angular
+//= require angular-rails-templates
 //= require angular-ui-router
 //= require angular-animate
 //= require angular-messages
@@ -11,4 +12,5 @@
 // new components need include before
 //= require app/app.config
 //= require_tree ./app
+//= require_tree ./templates
 
