@@ -16,13 +16,13 @@ angular
             $stateProvider
                 .state('drugs', {
                     url: '/',
-                    templateUrl: 'components/drugs/drugs.tpl.html',
+                    templateUrl: 'assets/app/components/drugs/drugs.tpl.html',
                     controller: 'drugsController',
                     controllerAs: 'drugsCtrl'
                 })
                 .state('paging', {
                     url: '/drugs?page',
-                    templateUrl: 'components/drugs/drugs.tpl.html',
+                    templateUrl: 'assets/app/components/drugs/drugs.tpl.html',
                     controller: 'drugsController',
                     controllerAs: 'drugsCtrl',
                     params: {
@@ -31,13 +31,13 @@ angular
                 })
                 .state('drug-detail', {
                     url: '/drugs/:id',
-                    templateUrl: 'components/drugs/drug-details/drug-details.tpl.html',
+                    templateUrl: 'assets/app/components/drugs/drug-details/drug-details.tpl.html',
                     controller: 'drugDetailsController',
                     controllerAs: 'detailsCtrl'
                 })
                 .state('app-detail', {
                     url: '/drugs/application/:id',
-                    templateUrl: 'components/drugs/drug-details/drug-details.tpl.html',
+                    templateUrl: 'assets/app/components/drugs/drug-details/drug-details.tpl.html',
                     controller: 'drugAppController',
                     controllerAs: 'detailsCtrl',
                     params: {
@@ -46,7 +46,7 @@ angular
                 })
                 .state('app-detail.patent', {
                     url: '/patent/:productId',
-                    templateUrl: 'components/drugs/patent/app-details.patent.tpl.html',
+                    templateUrl: 'assets/app/components/drugs/patent/app-details.patent.tpl.html',
                     controller: 'patentController',
                     controllerAs: 'patentCtrl',
                     params: {
