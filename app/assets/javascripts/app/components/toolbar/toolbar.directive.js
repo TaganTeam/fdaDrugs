@@ -6,7 +6,7 @@
 
     function toolbar() {
         return {
-            templateUrl: 'toolbar.tpl.html',
+            templateUrl: 'assets/app/components/toolbar/toolbar.tpl.html',
             controller: toolbarController,
             controllerAs: 'toolbarCtrl'
         };
