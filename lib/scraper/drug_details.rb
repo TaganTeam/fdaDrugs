@@ -22,37 +22,7 @@ module Scraper
       end
     end
 
-    def get_drug_details_page appl_no, attempt=1
-      p "---attempt--#{attempt}"
-      page = get_data_page('https://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm')
 
-      sleep 1
-      form = page.form('displaysearch')
-      form['searchTerm'] = appl_no
-      new_page = form.submit
-
-      sleep 0.5
-
-      if is_drug_details? new_page
-        drug_details_page = new_page
-      else
-        some_page = get_another_page(new_page)
-        drug_details_page = is_drug_details?(some_page) ? some_page : get_another_page(some_page)
-      end
-      drug_details_page
-
-    rescue Exception => e
-      Rails.logger.error "Scraper::DrugDetails ERRROR! Message: #{e}. Application number #{appl_no}"
-
-      if attempt >= 5
-        Rails.logger.error "Scraper::DrugDetails ERRROR! Message: #{e}. Application number #{appl_no}. Attempt more than 5. Application was skipped."
-        false
-      else
-        attempt += 1
-        sleep 0.5
-        get_drug_details_page appl_no, attempt
-      end
-    end
 
     def is_drug_details? page
       page.at('#user_provided table td.product_table a').nil?

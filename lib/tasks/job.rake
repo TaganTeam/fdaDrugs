@@ -53,7 +53,7 @@ namespace :job do
 
   task update_patents: :environment do
     p 'start'
-    Scraper::PatentsUpdate.new.parse_update_patens
+    Scraper::PatentsUpdate.new.parse_update_patents
     p 'done'
   end
 
