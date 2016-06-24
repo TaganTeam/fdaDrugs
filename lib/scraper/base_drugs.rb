@@ -101,7 +101,7 @@ module Scraper
 
 
 
-        if get_patents_data(first_table, false).present?
+        if exclusivity_table? first_table
           exclusivity_data = get_exclusivity_data(first_table)
           save_exclusivity_data(product, exclusivity_data)
         else
@@ -109,6 +109,10 @@ module Scraper
           save_patents_data(product, patents_data)
         end
       end
+    end
+
+    def exclusivity_table? table
+      table.text.match(/Exclusivity Code/).nil? ? false : true
     end
 
 
