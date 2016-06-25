@@ -29,7 +29,7 @@ module Scraper
     end
 
     def check_for_delelted_patents
-      sleep 0.5
+      sleep @parse_timeout
       page = get_data_page('http://www.accessdata.fda.gov/scripts/cder/ob/docs/delist.cfm')
 
       first_table = get_target_table(page, 0)
@@ -95,7 +95,7 @@ module Scraper
       form = page.forms.last
       field = form.radiobuttons_with(name: /table1/)[i]
       field.check
-      sleep 0.5
+      sleep @parse_timeout
       new_page = form.submit
       new_page
     end

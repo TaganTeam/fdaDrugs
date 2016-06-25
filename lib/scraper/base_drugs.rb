@@ -6,8 +6,12 @@ module Scraper
 
     attr_accessor :status
 
+    def initialize parse_timeout=0.5
+      @parse_timeout = parse_timeout
+    end
+
     def get_data_page url
-      sleep 0.5
+      sleep @parse_timeout
       mechanize = Mechanize.new
       page = mechanize.get(url)
       page
@@ -38,12 +42,12 @@ module Scraper
       p "---attempt--#{attempt}"
       page = get_data_page('https://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm')
 
-      sleep 1
+      sleep @parse_timeout
       form = page.form('displaysearch')
       form['searchTerm'] = appl_no
       new_page = form.submit
 
-      sleep 0.5
+      sleep @parse_timeout
 
       if is_drug_details? new_page
         drug_details_page = new_page
@@ -61,7 +65,7 @@ module Scraper
         false
       else
         attempt += 1
-        sleep 0.5
+        sleep @parse_timeout
         get_drug_details_page appl_no, attempt
       end
     end
@@ -94,7 +98,7 @@ module Scraper
     end
 
     def get_another_page page
-      sleep 0.5
+      sleep @parse_timeout
       text = page.at('#user_provided table td.product_table a').text
       link = page.link_with(text: text)
       some_page = link.click
@@ -119,7 +123,7 @@ module Scraper
     end
 
     def get_patent_status appl_no, product_number, market_status
-      sleep 0.5
+      sleep @parse_timeout
       list = get_patent_list market_status
       page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product_number}&table1=#{list}")
       get_target_table(page, 0).nil? ? 0 : 1
