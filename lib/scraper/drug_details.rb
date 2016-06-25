@@ -23,20 +23,6 @@ module Scraper
     end
 
 
-
-    def is_drug_details? page
-      page.at('#user_provided table td.product_table a').nil?
-    end
-
-    def get_another_page page
-      sleep 0.5
-      text = page.at('#user_provided table td.product_table a').text
-      link = page.link_with(text: text)
-      some_page = link.click
-      some_page
-    end
-
-
     private
 
 
