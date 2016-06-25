@@ -78,4 +78,4 @@ gem 'roo', '~> 2.4.0'
 gem 'roo-xls'
 
 gem 'delayed_job_active_record'
-gem 'clockwork'
+gem 'chronic'
