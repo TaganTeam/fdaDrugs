@@ -13,11 +13,13 @@
     <div class="col-md-6">
         <div ng-repeat="app in drug.apps">
             <a href="/drugs/application/{{ app.id }}">{{ app.application_number }}</a>
+
+            <span ng-repeat="status in app.status">
+               <span style="margin-left: 15px;"
+                     ng-if="status">
+                   Patent Info
+               </span>
+            </span>
         </div>
     </div>
-    <!--<div class="col-md-6">-->
-        <!--<span ng-repeat="app in drug.drug_applications" style="margin-right: 10px;">-->
-            <!--<span>{{ app.application_number }}</span>-->
-        <!--</span>-->
-    <!--</div>-->
 </div>

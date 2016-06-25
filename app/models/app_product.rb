@@ -15,4 +15,8 @@ class AppProduct < ActiveRecord::Base
     t.add :patent_status
     t.add :product_number
   end
+
+  api_accessible :status do |t|
+    t.add :patent_status
+  end
 end
