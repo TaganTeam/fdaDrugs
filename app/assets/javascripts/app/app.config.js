@@ -5,7 +5,8 @@ angular
         'ngAnimate',
         'angular-storage',
         'ui.bootstrap',
-        'ngTouch'
+        'ngTouch',
+        'templates'
     ])
     .constant('CONFIG',
         {

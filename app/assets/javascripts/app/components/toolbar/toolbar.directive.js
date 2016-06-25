@@ -6,7 +6,7 @@
 
     function toolbar() {
         return {
-            templateUrl: 'toolbar.html',
+            templateUrl: 'toolbar.tpl.html',
             controller: toolbarController,
             controllerAs: 'toolbarCtrl'
         };
