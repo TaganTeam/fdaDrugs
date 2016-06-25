@@ -21,7 +21,7 @@
         function patentCodeInfo(id) {
             $uibModal.open({
                 animation: true,
-                templateUrl: 'assets/app/components/drugs/patent/patent-modal/patent-code-modal.tpl.html',
+                templateUrl: 'patent/patent-modal/patent-code-modal.tpl.html',
                 controller: 'patentCodeController',
                 controllerAs: 'patentCodeCtrl',
                 resolve: {
@@ -35,7 +35,7 @@
         function exclusiveCodeInfo(id) {
             $uibModal.open({
                 animation: true,
-                templateUrl: 'assets/app/components/drugs/patent/exclusive-modal/exclusive-code-modal.tpl.html',
+                templateUrl: 'patent/exclusive-modal/exclusive-code-modal.tpl.html',
                 controller: 'exclusiveCodeController',
                 controllerAs: 'exclusiveCodeCtrl',
                 resolve: {
