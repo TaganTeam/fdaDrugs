@@ -89,6 +89,18 @@ module Scraper
       ary
     end
 
+    def is_drug_details? page
+      page.at('#user_provided table td.product_table a').nil?
+    end
+
+    def get_another_page page
+      sleep 0.5
+      text = page.at('#user_provided table td.product_table a').text
+      link = page.link_with(text: text)
+      some_page = link.click
+      some_page
+    end
+
     def get_product_number index, appl_no, new_drug
       if new_drug
         "0#{index < 9 ? '0' : index + 1}#{index}"
@@ -153,7 +165,7 @@ module Scraper
         search_results = {}
         unless i == 0
           if is_update
-            search_results[:app_number] = clear_name(row.search('td')[0].text).strip
+            search_results[:app_number] = clear_name(row.search('td')[0].text.gsub(/[^\d]/, '')).strip
             search_results[:product_number] = clear_name(row.search('td')[1].text).strip
           end
           search_results[:number] = row.search('td')[ is_update ? 3 : 2].text
