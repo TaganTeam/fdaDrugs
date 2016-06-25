@@ -12,5 +12,5 @@
 // new components need include before
 //= require app/app.config
 //= require_tree ./app
-//= require_tree ./templates
+//= require_tree ./app/templates
 

@@ -7,7 +7,7 @@
 
     function drug() {
         return {
-            templateUrl: 'drug.tpl.html',
+            templateUrl: 'drugs/drug/drug.tpl.html',
             scope: {
               drugs: '='  
             },
