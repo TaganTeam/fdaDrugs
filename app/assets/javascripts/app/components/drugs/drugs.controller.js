@@ -10,7 +10,7 @@
         var vm = this;
         vm.pageChanged = pageChanged;
 
-        vm.maxSize = 5;
+        vm.maxSize = 10;
         vm.currentPage = $stateParams.page || 1;
         vm.perPage = 25;
 

@@ -15,6 +15,12 @@ class DrugApplication < ActiveRecord::Base
     t.add :application_number
   end
 
+  api_accessible :light_status do |t|
+    t.add :id
+    t.add :application_number
+    t.add lambda{ |app| app.app_products.map(&:patent_status).uniq.as_api_response(:status) }, as: :status
+  end
+
   api_accessible :basic, extend: :light do |t|
     t.add lambda{ |app| app.drug.brand_name }, as: :brand_name
     t.add lambda{ |app| app.drug.generic_name }, as: :generic_name
