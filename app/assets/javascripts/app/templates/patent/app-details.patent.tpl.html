@@ -1,6 +1,6 @@
 <h3><ins>Patent and Exclusivity Data</ins> for product: {{ patentCtrl.productNumber }}</h3>
 
-<table class="table table-condensed table-hover">
+<table class="table table-condensed table-hover" ng-if="patentCtrl.patents.length">
     <thead>
         <tr>
             <th>Patent No</th>
@@ -28,7 +28,7 @@
     </tbody>
 </table>
 
-<table class="table table-condensed table-hover">
+<table class="table table-condensed table-hover" ng-if="patentCtrl.exclusivities.length">
     <thead>
     <tr>
         <th>Exclusivity code</th>
