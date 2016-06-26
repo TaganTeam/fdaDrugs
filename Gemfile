@@ -78,4 +78,5 @@ gem 'roo', '~> 2.4.0'
 gem 'roo-xls'
 
 gem 'delayed_job_active_record'
-gem 'chronic'
+gem 'delayed_job_web'
+gem 'daemons'

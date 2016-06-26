@@ -15,4 +15,5 @@ class Patent < ActiveRecord::Base
     t.add :drug_product_claim
     t.add :delist_requested
   end
+
 end

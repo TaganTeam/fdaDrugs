@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   mount API::Base => '/api'
   mount GrapeSwaggerRails::Engine => '/apidoc'
+  match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
 
   root 'application#show'
 
