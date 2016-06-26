@@ -1,3 +1,4 @@
+require "delayed/recipes"
 # Change these
 server '139.59.172.75', port: 22, roles: [:web, :app, :db], primary: true
 
@@ -27,6 +28,7 @@ set :bower_roles, :web
 set :bower_target_path, lambda {"#{release_path}"}
 set :bower_bin, :bower
 set :linked_files, %w{config/database.yml config/secrets.yml}
+set :rails_env, "production"
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
@@ -82,6 +84,11 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
+
+
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
 
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma

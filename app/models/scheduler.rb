@@ -79,18 +79,6 @@ class Scheduler < ActiveRecord::Base
     time_changed? || day_changed? || frequency_changed?
   end
 
-  def chronic
-    Time.use_zone('Europe/London') do
-      Chronic.time_class = Time.zone
-      formula = case frequency
-                  when 'day', 'every_some_minutes' then "now at #{time_formatted}"
-                  when 'week'  then "#{day} at #{time_formatted}"
-                  when 'month' then "#{day}th this month at #{time_formatted}"
-                end
-      Chronic.parse formula
-    end
-  end
-
   def run_at
     @run_at ||= Time.now.utc
   end
