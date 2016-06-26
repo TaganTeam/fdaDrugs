@@ -29,8 +29,9 @@ set :bower_bin, :bower
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :rails_env, "production"
 
-set :delayed_job_server_role, :worker
-set :delayed_job_args, "-n 2"
+set :delayed_job_workers, 2
+set :delayed_job_prefix, 'parsers'
+set :delayed_job_queues, ['defaulf']
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
@@ -93,14 +94,9 @@ namespace :deploy do
   after  :finishing,    :restart
 end
 
-
-after 'deploy:publishing', 'deploy:restart'
-namespace :deploy do
-  task :restart do
-    invoke 'delayed_job:restart'
-  end
+after 'deploy:published', 'delayed_job:restart' do
+  invoke 'delayed_job:restart'
 end
-
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
