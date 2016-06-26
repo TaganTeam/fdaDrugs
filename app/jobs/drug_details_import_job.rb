@@ -1,5 +1,4 @@
 class DrugDetailsImportJob
-  @queue = :default
 
   def before(job)
     @task_id = job.owner_id
@@ -36,8 +35,7 @@ class DrugDetailsImportJob
       Delayed::Job.create handler: DrugDetailsImportJob.new.to_yaml,
                           run_at: run_at, scheduled_at: run_at,
                           owner_type: job.owner_type,
-                          owner_id: job.owner_id.to_i,
-                          queue: :default
+                          owner_id: job.owner_id.to_i
     end
 
 end

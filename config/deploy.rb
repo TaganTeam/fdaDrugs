@@ -31,7 +31,7 @@ set :rails_env, "production"
 
 set :delayed_job_workers, 1
 set :delayed_job_prefix, 'parsers'
-set :delayed_job_queues, ['defaulf']
+# set :delayed_job_queues, ['defaulf']
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
