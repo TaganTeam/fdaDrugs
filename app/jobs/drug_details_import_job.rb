@@ -14,7 +14,7 @@ class DrugDetailsImportJob
 
   def perform
     p Dir.pwd
-    Scraper::DrugDetails.new(parse_timeout).parse_drugs(10)
+    Scraper::DrugDetails.new(parse_timeout).parse_drugs(100)
   end
 
   protected
