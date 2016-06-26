@@ -29,7 +29,7 @@ set :bower_bin, :bower
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :rails_env, "production"
 
-set :delayed_job_workers, 2
+set :delayed_job_workers, 1
 set :delayed_job_prefix, 'parsers'
 set :delayed_job_queues, ['defaulf']
 ## Defaults:
