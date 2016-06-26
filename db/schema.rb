@@ -37,14 +37,12 @@ ActiveRecord::Schema.define(version: 20160625210946) do
     t.datetime "failed_at"
     t.string   "locked_by"
     t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.datetime "scheduled_at"
     t.string   "owner_type"
     t.integer  "owner_id"
   end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
   create_table "drug_applications", force: :cascade do |t|
     t.integer  "drug_id"
