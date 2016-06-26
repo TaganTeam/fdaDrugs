@@ -41,9 +41,9 @@ set :delayed_job_queues, ['defaulf']
 
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
-# set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
-set :linked_dirs, %w{tmp/pids}
+#set :linked_dirs, %w{tmp/pids}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -93,6 +93,28 @@ namespace :deploy do
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
+
+
+# namespace :delayed_job do
+#
+#   desc "Install Deployed Job executable if needed"
+#   task :install do
+#     on roles(delayed_job_roles) do |host|
+#       within release_path do
+#         # Only install if not already present
+#         unless test("[ -f #{release_path}/#{delayed_job_bin} ]")
+#           with rails_env: fetch(:rails_env) do
+#             execute :bundle, :exec, :rails, :generate, :delayed_job
+#           end
+#         end
+#       end
+#     end
+#   end
+#
+#   before :start, :install
+#   before :restart, :install
+#
+# end
 
 after 'deploy:published', 'delayed_job:restart' do
   invoke 'delayed_job:restart'
