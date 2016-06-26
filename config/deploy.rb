@@ -117,7 +117,8 @@ end
 # end
 
 after 'deploy:published', 'delayed_job:restart' do
-  invoke 'delayed_job:restart'
+  invoke 'delayed_job:stop'
+  invoke 'delayed_job:start'
 end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
