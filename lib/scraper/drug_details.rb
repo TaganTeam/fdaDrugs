@@ -13,11 +13,13 @@ module Scraper
           drug_table = get_target_table(details_page, 4)
           products_table = get_target_table(details_page, 7)
 
-          drug_details = get_drug_details(drug_table)
-          drug = save_or_find_drug(drug_details)
+          if drug_table.present?
+            drug_details = get_drug_details(drug_table)
+            drug = save_or_find_drug(drug_details)
 
-          save_drug_app(app, drug_details, drug.id)
-          save_products(app, get_products_details(products_table, app.application_number, false))
+            save_drug_app(app, drug_details, drug.id)
+            save_products(app, get_products_details(products_table, app.application_number, false)) if products_table.present?
+          end
         end
       end
     end
