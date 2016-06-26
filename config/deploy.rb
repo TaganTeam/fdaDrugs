@@ -1,4 +1,3 @@
-require "delayed/recipes"
 # Change these
 server '139.59.172.75', port: 22, roles: [:web, :app, :db], primary: true
 
@@ -29,6 +28,9 @@ set :bower_target_path, lambda {"#{release_path}"}
 set :bower_bin, :bower
 set :linked_files, %w{config/database.yml config/secrets.yml}
 set :rails_env, "production"
+
+set :delayed_job_server_role, :worker
+set :delayed_job_args, "-n 2"
 ## Defaults:
 # set :scm,           :git
 # set :branch,        :master
@@ -39,6 +41,8 @@ set :rails_env, "production"
 ## Linked Files & Directories (Default None):
 # set :linked_files, %w{config/database.yml}
 # set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+set :linked_dirs, %w{tmp/pids}
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
@@ -83,12 +87,19 @@ namespace :deploy do
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart
+
+  after  :starting,    :compile_assets
+  after  :finishing,    :cleanup
+  after  :finishing,    :restart
 end
 
 
-after "deploy:stop",    "delayed_job:stop"
-after "deploy:start",   "delayed_job:start"
-after "deploy:restart", "delayed_job:restart"
+after 'deploy:publishing', 'deploy:restart'
+namespace :deploy do
+  task :restart do
+    invoke 'delayed_job:restart'
+  end
+end
 
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
