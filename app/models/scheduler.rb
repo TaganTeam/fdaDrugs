@@ -43,7 +43,7 @@ class Scheduler < ActiveRecord::Base
   end
 
   def parse_timeout
-    task['parse_timeout'].to_i
+    task['parse_timeout'].to_f
   end
 
   def per_run_count
