@@ -1,5 +1,3 @@
-require 'lib/scraper/drug_details'
-
 class DrugDetailsImportJob
 
   def before(job)
@@ -34,10 +32,8 @@ class DrugDetailsImportJob
 
     def add_next_job job
       run_at = Time.now.utc + task.per_run_count.minutes
-      Delayed::Job.create handler: DrugDetailsImportJob.new.to_yaml,
-                          run_at: run_at, scheduled_at: run_at,
-                          owner_type: job.owner_type,
-                          owner_id: job.owner_id.to_i
+      Delayed::Job.create handler: DrugDetailsImportJob.new.to_yaml, run_at: run_at, scheduled_at: run_at,
+                          owner_type: job.owner_type, owner_id: job.owner_id.to_i
     end
 
 end
