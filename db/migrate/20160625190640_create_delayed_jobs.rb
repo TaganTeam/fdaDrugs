@@ -1,4 +1,4 @@
-class CreateSchedulers < ActiveRecord::Migration
+class CreateDelayedJobs < ActiveRecord::Migration
   def change
     create_table :delayed_jobs do |t|
       t.integer  "priority",     default: 0, null: false

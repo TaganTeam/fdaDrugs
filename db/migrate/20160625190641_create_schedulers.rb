@@ -1,4 +1,4 @@
-class CreateDelayedJobs < ActiveRecord::Migration
+class CreateSchedulers < ActiveRecord::Migration
   def change
     create_table :schedulers do |t|
       t.string   "type",                           null: false
