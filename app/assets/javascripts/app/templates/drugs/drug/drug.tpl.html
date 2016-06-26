@@ -6,7 +6,7 @@
         <h3>Application Number</h3>
     </div>
 </div>
-<div class="row drugs-animate" ng-repeat="drug in drugs" ng-class="{ success : has_patent }">
+<div class="row drugs-animate" ng-repeat="drug in drugs">
     <div class="col-md-4">
         <p><a href="/drugs/{{ drug.id }}">{{ drug.brand_name }}</a></p>
     </div>
