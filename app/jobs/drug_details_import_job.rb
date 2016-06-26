@@ -1,3 +1,5 @@
+require 'lib/scraper/drug_details'
+
 class DrugDetailsImportJob
 
   def before(job)
@@ -13,7 +15,7 @@ class DrugDetailsImportJob
   end
 
   def perform
-    Scraper::DrugDetails.new(@parse_timeout).parse_drugs
+    Scraper::DrugDetails.new(parse_timeout).parse_drugs(200)
   end
 
   protected

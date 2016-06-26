@@ -1,5 +1,5 @@
 class Scheduler::DrugDetailsImport < Scheduler
-
+ #Scheduler::DrugDetailsImport.create({frequency: 'every_some_minutes', task: {"per_run_count"=>"5", "parse_timeout"=>"0.5"}})
   protected
 
     def create_background_job
