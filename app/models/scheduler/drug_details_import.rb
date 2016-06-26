@@ -4,6 +4,7 @@ class Scheduler::DrugDetailsImport < Scheduler
 
     def create_background_job
       jobs.destroy_all
-      jobs.build handler: DrugDetailsImportJob.new.to_yaml, run_at: run_at, scheduled_at: run_at
+      jobs.build handler: DrugDetailsImportJob.new.to_yaml, run_at: run_at, scheduled_at: run_at,
+                 owner_type: 'Scheduler', owner_id: self.id
     end
 end
