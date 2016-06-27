@@ -4,6 +4,9 @@ require 'mechanize'
 module Scraper
   class BaseDrugs
 
+    DRUG_DETAIL_TABLE_INDEX = 4
+    DRUG_PRODUCTS_TABLE_INDEX = 7
+
     attr_accessor :status
 
     def initialize parse_timeout=0.5

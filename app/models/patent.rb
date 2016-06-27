@@ -16,4 +16,7 @@ class Patent < ActiveRecord::Base
     t.add :delist_requested
   end
 
+
+  validates :number, presence: true, uniqueness: {scope: :app_product_id}
+
 end

@@ -10,8 +10,8 @@ module Scraper
 
         if details_page.present?
 
-          drug_table = get_target_table(details_page, 4)
-          products_table = get_target_table(details_page, 7)
+          drug_table = get_target_table(details_page, DRUG_DETAIL_TABLE_INDEX)
+          products_table = get_target_table(details_page, DRUG_PRODUCTS_TABLE_INDEX)
 
           if drug_table.present?
             drug_details = get_drug_details(drug_table)
