@@ -4,7 +4,7 @@ module Scraper
     def parse_update_patents
       [target_patents_data('OB_Rx'), target_patents_data('OB_OTC'), target_patents_data('OB_Disc')].each do |new_patents_data|
         if new_patents_data
-          new_patents_data.first(3).each do |patent|
+          new_patents_data.each do |patent|
             app = DrugApplication.find_by_application_number patent[:app_number]
             if app
               product = app.app_products.where(product_number: patent[:product_number])
