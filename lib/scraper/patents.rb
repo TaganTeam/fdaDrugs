@@ -1,11 +1,9 @@
 module Scraper
   class Patents < BaseDrugs
 
-    def parse_patents_exclusivities
-      DrugApplication.all.each do |app|
-        app.app_products.where(patent_status: true).each do |product|
-          save_patent_exclusivity_for(app.application_number, product)
-        end
+    def parse_patents_exclusivities cnt = 100
+      AppProduct.where(patent_status: true, parsed: false).first(cnt).each do |product|
+        save_patent_exclusivity_for(product.drug_application.application_number, product)
       end
     end
   end
