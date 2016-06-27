@@ -1,4 +1,4 @@
-class DrugDetailsImportJob
+class PatentsAndExclusivitiesImportJob
 
   def before(job)
     @task_id = job.owner_id
@@ -13,8 +13,7 @@ class DrugDetailsImportJob
   end
 
   def perform
-    p Dir.pwd
-    Scraper::DrugDetails.new(parse_timeout).parse_drugs(300)
+    Scraper::Patents.new(parse_timeout).parse_patents_exclusivities(300)
   end
 
   protected
@@ -28,12 +27,12 @@ class DrugDetailsImportJob
     end
 
     def task
-      @task ||= Scheduler::DrugDetailsImport.find(task_id)
+      @task ||= Scheduler::PatentsAndExclusivitiesImport.find(task_id)
     end
 
     def add_next_job job
       run_at = Time.now.utc + task.per_run_count.minutes
-      Delayed::Job.create handler: DrugDetailsImportJob.new.to_yaml, run_at: run_at, scheduled_at: run_at,
+      Delayed::Job.create handler: PatentsAndExclusivitiesImportJob.new.to_yaml, run_at: run_at, scheduled_at: run_at,
                           owner_type: job.owner_type, owner_id: job.owner_id.to_i
     end
 
