@@ -4,6 +4,8 @@ module Scraper
     attr_accessor :app
 
     def parse_new_drugs
+      sleep @parse_timeout*50
+      return false
       new_drugs_page = get_new_drugs_page('http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu')
       new_drugs_page.search('table[summary="Original New Drug Application(NDA) Approvals"] tr[valign="top"]').each_with_index do |drug_row, index|
         if new_app? drug_row
