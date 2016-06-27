@@ -9,16 +9,18 @@ module Scraper
         if new_app? drug_row
           drug_details_page = get_new_drug_details_page(new_drugs_page, index)
 
-          new_drug_table = get_drug_table(drug_details_page)
-          new_products_table = get_products_table(drug_details_page)
+          new_drug_table = get_target_table(drug_details_page, DRUG_DETAIL_TABLE_INDEX)
+          new_products_table = get_target_table(drug_details_page, DRUG_PRODUCTS_TABLE_INDEX)
 
           new_app_data = get_drug_details(new_drug_table)
           drug = save_or_find_drug(new_app_data)
 
           save_new_drug_app(new_app_data, drug.id)
           new_product_data = get_products_details(new_products_table, @app.application_number, true)
-          save_products(@app, new_product_data)
-          save_patent_exclusivity_for(@app.application_number, product)
+          products = save_products(@app, new_product_data)
+          products.each do |product|
+            save_patent_exclusivity_for(@app.application_number, product) if product.patent_status
+          end
         end
       end
     end

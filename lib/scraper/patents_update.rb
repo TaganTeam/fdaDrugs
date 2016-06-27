@@ -2,18 +2,16 @@ module Scraper
   class PatentsUpdate < BaseDrugs
 
     def parse_update_patents
-
       [target_patents_data('OB_Rx'), target_patents_data('OB_OTC'), target_patents_data('OB_Disc')].each do |new_patents_data|
-
         if new_patents_data
-          new_patents_data.each do |patent|
+          new_patents_data.first(3).each do |patent|
             app = DrugApplication.find_by_application_number patent[:app_number]
             if app
               product = app.app_products.where(product_number: patent[:product_number])
 
               if product.empty?
                 details_page = get_drug_details_page(patent[:app_number])
-                products_table = get_target_table(details_page, 7)
+                products_table = get_target_table(details_page, DRUG_PRODUCTS_TABLE_INDEX)
                 products = get_products_details(products_table, app.application_number, false)
                 attr = products.find {|key| key[:product_number] == patent[:product_number]}
 
@@ -25,10 +23,10 @@ module Scraper
           end
         end
       end
-      check_for_delelted_patents
+      check_for_deleted_patents
     end
 
-    def check_for_delelted_patents
+    def check_for_deleted_patents
       sleep @parse_timeout
       page = get_data_page('http://www.accessdata.fda.gov/scripts/cder/ob/docs/delist.cfm')
 
