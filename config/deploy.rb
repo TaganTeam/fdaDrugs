@@ -81,6 +81,8 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       invoke 'puma:restart'
+      invoke 'delayed_job:stop'
+      invoke 'delayed_job:start'
     end
   end
 
@@ -116,10 +118,18 @@ end
 #
 # end
 
-after 'deploy:published', 'delayed_job:restart' do
-  invoke 'delayed_job:stop'
-  invoke 'delayed_job:start'
-end
+# namespace :rake do
+#   desc "Run a task on a remote server."
+#   # run like: cap staging rake:invoke task=a_certain_task
+#   task :invoke do
+#     run("cd #{deploy_to}/current; nohup /usr/bin/env rake jobs:work RAILS_ENV=#{rails_env} --trace > rake.out 2>&1 &")
+#   end
+# end
+#
+# after 'deploy:published', 'delayed_job:restart' do
+#   invoke 'delayed_job:stop'
+#   invoke 'delayed_job:start'
+# end
 # ps aux | grep puma    # Get puma pid
 # kill -s SIGUSR2 pid   # Restart puma
 # kill -s SIGTERM pid   # Stop puma
