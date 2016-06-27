@@ -159,7 +159,7 @@ module Scraper
         end
       end
 
-      product.update_attribute(parsed: true)
+      product.update_attributes(parsed: true)
     end
 
     def exclusivity_table? table
