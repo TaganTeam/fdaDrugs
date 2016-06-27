@@ -2,7 +2,8 @@ module Scraper
   class PatentsUpdate < BaseDrugs
 
     def parse_update_patents
-
+      sleep @parse_timeout*50
+      return false
       [target_patents_data('OB_Rx'), target_patents_data('OB_OTC'), target_patents_data('OB_Disc')].each do |new_patents_data|
 
         if new_patents_data
