@@ -155,6 +155,8 @@ module Scraper
           save_patents_data(product, patents_data)
         end
       end
+
+      product.update_attribute(parsed: true)
     end
 
     def exclusivity_table? table
