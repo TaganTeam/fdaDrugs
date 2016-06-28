@@ -15,10 +15,10 @@ module Scraper
                 products = get_products_details(products_table, app.application_number, false)
                 attr = products.find {|key| key[:product_number] == patent[:product_number]}
 
-                product = save_products(app, attr).last
+                product = save_products(app, attr)
               end
 
-              save_patent(product.id, patent)
+              save_patent(product.last.id, patent)
             end
           end
         end
