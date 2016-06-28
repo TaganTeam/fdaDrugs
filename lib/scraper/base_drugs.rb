@@ -137,29 +137,33 @@ module Scraper
       list = get_patent_list product.market_status
       p "http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product.product_number}&table1=#{list}"
       page = get_data_page("http://www.accessdata.fda.gov/scripts/cder/ob/docs/patexclnew.cfm?Appl_No=#{appl_no}&Product_No=#{product.product_number}&table1=#{list}")
+      
+      begin
+        first_table = get_target_table(page, 0)
+        second_table = get_target_table(page, 1)
 
-
-      first_table = get_target_table(page, 0)
-      second_table = get_target_table(page, 1)
-
-      unless second_table.nil?
-        exclusivity_data = get_exclusivity_data(second_table)
-        save_exclusivity_data(product, exclusivity_data)
-
-        patents_data = get_patents_data(first_table, false)
-        save_patents_data(product, patents_data)
-      else
-
-        if exclusivity_table? first_table
-          exclusivity_data = get_exclusivity_data(first_table)
+        unless second_table.nil?
+          exclusivity_data = get_exclusivity_data(second_table)
           save_exclusivity_data(product, exclusivity_data)
-        else
+
           patents_data = get_patents_data(first_table, false)
           save_patents_data(product, patents_data)
-        end
-      end
+        else
 
-      product.update_attributes(parsed: true)
+          if exclusivity_table? first_table
+            exclusivity_data = get_exclusivity_data(first_table)
+            save_exclusivity_data(product, exclusivity_data)
+          else
+            patents_data = get_patents_data(first_table, false)
+            save_patents_data(product, patents_data)
+          end
+        end
+
+        product.update_attributes(parsed: true)
+
+      rescue Exception => e
+        Rails.logger.error "Scraper::Patents ERROR! Message: #{e}. Application number #{appl_no}. Product number #{product.product_number}"
+      end
     end
 
     def exclusivity_table? table
