@@ -83,3 +83,5 @@ gem 'delayed_job_web'
 gem 'daemons'
 
 gem 'newrelic_rpm'
+
+gem 'activeadmin', github: 'activeadmin'
