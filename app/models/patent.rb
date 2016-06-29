@@ -17,6 +17,6 @@ class Patent < ActiveRecord::Base
   end
 
 
-  # validates :number, presence: true, uniqueness: {scope: :app_product_id}
+  validates :number, presence: true, uniqueness: {scope: :app_product_id}
 
 end
