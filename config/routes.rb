@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   mount API::Base => '/api'
   mount GrapeSwaggerRails::Engine => '/apidoc'
   match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   root 'application#show'
 
@@ -25,5 +27,5 @@ Rails.application.routes.draw do
   get '/login', to: 'auth#login'
   get '/registration', to: 'auth#registration'
 
-  get '/*path' => 'auth#redirect'
+  # get '/*path' => 'auth#redirect'
 end
