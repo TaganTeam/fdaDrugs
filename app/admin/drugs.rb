@@ -1,4 +1,5 @@
 ActiveAdmin.register Drug do
+  menu priority: 2
 
   config.batch_actions = false
 

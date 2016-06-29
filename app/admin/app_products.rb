@@ -1,4 +1,5 @@
 ActiveAdmin.register AppProduct do
+  menu priority: 4
 
   config.batch_actions = false
 

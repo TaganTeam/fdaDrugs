@@ -1,4 +1,5 @@
 ActiveAdmin.register User do
+  menu priority: 7
   config.batch_actions = false
 
   permit_params :email
