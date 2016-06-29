@@ -7,9 +7,9 @@ module Scraper
           new_patents_data.each do |patent|
             app = DrugApplication.find_by_application_number patent[:app_number]
             if app
-              product = app.app_products.where(product_number: patent[:product_number])
+              product = app.app_products.where(product_number: patent[:product_number]).first
 
-              if product.empty?
+              if product.blank?
                 details_page = get_drug_details_page(patent[:app_number])
                 products_table = get_target_table(details_page, DRUG_PRODUCTS_TABLE_INDEX)
                 products = get_products_details(products_table, app.application_number, false)
@@ -18,7 +18,7 @@ module Scraper
                 product = save_products(app, attr)
               end
 
-              save_patent(product.last.id, patent)
+              save_patent(product.id, patent)
             end
           end
         end
