@@ -1,4 +1,5 @@
 ActiveAdmin.register Patent do
+  menu priority: 5
   config.batch_actions = false
 
   permit_params :number, :patent_expiration, :drug_substance_claim, :drug_product_claim, :delist_requested

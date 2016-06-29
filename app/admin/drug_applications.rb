@@ -1,5 +1,5 @@
 ActiveAdmin.register DrugApplication do
-
+  menu priority: 3, label: 'Applications'
   config.batch_actions = false
 
   permit_params :application_number, :company, :approval_date
