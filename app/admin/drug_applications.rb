@@ -1,5 +1,6 @@
 ActiveAdmin.register DrugApplication do
   menu priority: 3, label: 'Applications'
+
   config.batch_actions = false
 
   permit_params :application_number, :company, :approval_date
@@ -7,8 +8,8 @@ ActiveAdmin.register DrugApplication do
   index do
     selectable_column
     id_column
-    column :drug_id do |drug|
-      link_to drug.drug.brand_name, admin_drug_path(drug.id)
+    column :drug_id do |app|
+      link_to app.drug.brand_name, admin_drug_path(app.drug_id)
     end
     column :application_number
     column :company
