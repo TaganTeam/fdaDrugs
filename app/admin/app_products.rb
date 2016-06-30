@@ -1,5 +1,5 @@
 ActiveAdmin.register AppProduct do
-  menu priority: 4
+  menu priority: 4, label: 'Products'
 
   config.batch_actions = false
 
@@ -8,8 +8,8 @@ ActiveAdmin.register AppProduct do
   index do
     selectable_column
     id_column
-    column :drug_application_id do |app|
-      link_to app.drug_application.application_number, admin_drug_application_path(app.id)
+    column :drug_application_id do |product|
+      link_to product.drug_application.application_number, admin_drug_application_path(product.drug_application_id)
     end
     column :strength
     column :dosage

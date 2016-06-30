@@ -7,6 +7,17 @@ ActiveAdmin.register Patent do
   index do
     selectable_column
     id_column
+    column :drug do |patent|
+      app = patent.app_product.drug_application
+      link_to app.drug.brand_name, admin_drug_path(app.drug_id)
+    end
+    column :application do |patent|
+      app = patent.app_product.drug_application
+      link_to app.application_number, admin_drug_application_path(app.id)
+    end
+    column :product_no do |patent|
+      patent.app_product.product_number
+    end
     column :number
     column :patent_expiration
     column :drug_substance_claim

@@ -7,7 +7,23 @@ ActiveAdmin.register Exclusivity do
   index do
     selectable_column
     id_column
-    column :exclusivity_code_id
+    column :drug do |exclusivity|
+      app = exclusivity.app_product.drug_application
+      link_to app.drug.brand_name, admin_drug_path(app.drug_id)
+    end
+    column :application do |exclusivity|
+      app = exclusivity.app_product.drug_application
+      link_to app.application_number, admin_drug_application_path(app.id)
+    end
+    column :product_no do |exclusivity|
+      exclusivity.app_product.product_number
+    end
+    column :exclusivity_code_id do |exclusivity|
+      exclusivity.exclusivity_code.code
+    end
+    column :definition do |exclusivity|
+      exclusivity.exclusivity_code.definition
+    end
     column :exclusivity_expiration
     actions
   end
@@ -16,7 +32,7 @@ ActiveAdmin.register Exclusivity do
   filter :exclusivity_expiration
 
   form do |f|
-    f.inputs "Patent" do
+    f.inputs "exclusivity" do
       f.input :number
       f.input :patent_expiration
       f.input :drug_substance_claim
