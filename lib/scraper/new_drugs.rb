@@ -1,7 +1,7 @@
 module Scraper
   class NewDrugs < BaseDrugs
 
-    attr_accessor :app
+    attr_accessor :app, :no_results
 
     def parse_new_drugs
       new_drugs_page = get_new_drugs_page('http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu')
@@ -9,17 +9,21 @@ module Scraper
         if new_app? drug_row
           drug_details_page = get_new_drug_details_page(new_drugs_page, index)
 
-          new_drug_table = get_target_table(drug_details_page, DRUG_DETAIL_TABLE_INDEX)
-          new_products_table = get_target_table(drug_details_page, DRUG_PRODUCTS_TABLE_INDEX)
+          if @no_results.blank?
+            new_drug_table = get_target_table(drug_details_page, DRUG_DETAIL_TABLE_INDEX)
+            new_products_table = get_target_table(drug_details_page, DRUG_PRODUCTS_TABLE_INDEX)
 
-          new_app_data = get_drug_details(new_drug_table)
-          drug = save_or_find_drug(new_app_data)
+            new_app_data = get_drug_details(new_drug_table)
+            drug = save_or_find_drug(new_app_data)
 
-          save_new_drug_app(new_app_data, drug.id)
-          new_product_data = get_products_details(new_products_table, @app.application_number, true)
-          products = save_products(@app, new_product_data)
-          products.each do |product|
-            save_patent_exclusivity_for(@app.application_number, product) if product.patent_status
+            save_new_drug_app(new_app_data, drug.id)
+            new_product_data = get_products_details(new_products_table, @app.application_number, true)
+            products = save_products(@app, new_product_data)
+            products.each do |product|
+              save_patent_exclusivity_for(@app.application_number, product) if product.patent_status
+            end
+          else
+           return @no_results
           end
         end
       end
@@ -30,6 +34,16 @@ module Scraper
       form = page.form('MonthlyApprovalsAll')
       form.radiobutton_with(id: /OriginalNewDrugApprovals/).check
       new_page = form.submit
+
+      # empty_table = get_target_table(new_page, 2)
+
+      # text = empty_table.search('td strong a').text
+      # link = new_page.link_with(text: text)
+      # previous_page = link.click
+      #
+      # previous_page
+
+
       new_page
     end
 
@@ -39,10 +53,15 @@ module Scraper
     end
 
     def get_new_drug_details_page(page, i)
-      text = page.search('#user_provided table td.DataRow a')[i].text
-      link = page.link_with(text: text)
-      new_drug_page = link.click
-      new_drug_page
+      links = page.search('#user_provided table td.DataRow a')
+      unless links.blank?
+        text = links[i].text
+        link = page.link_with(text: text)
+        new_drug_page = link.click
+        new_drug_page
+      else
+        @no_results = clear_symbols page.search('#user_provided table td.DataRow').text
+      end
     end
 
     private
