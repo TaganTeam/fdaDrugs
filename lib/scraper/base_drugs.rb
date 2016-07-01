@@ -254,5 +254,9 @@ module Scraper
       name.gsub(/\r|\n|\t/,'').gsub(/\s+/, '')
     end
 
+    def clear_symbols name
+      name.gsub(/\r|\n|\t/,'')
+    end
+
   end
 end

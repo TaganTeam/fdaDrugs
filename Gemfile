@@ -33,10 +33,14 @@ group :development do
   gem 'spring'
 end
 
-# group :production, :staging do
-#   gem 'heroku_rails_deflate'
-#   gem 'rails_12factor'
-# end
+group :development, :test do
+  gem 'rspec-rails', '~> 3.4'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'vcr'
+  gem 'webmock'
+end
+
 
 group :development do
   gem 'capistrano',         require: false
