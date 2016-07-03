@@ -1,24 +1,30 @@
 module Scraper
   class PatentsUpdate < BaseDrugs
 
-    def parse_update_patents
-      [target_patents_data('OB_Rx'), target_patents_data('OB_OTC'), target_patents_data('OB_Disc')].each do |new_patents_data|
+    def parse_update_patents limit=1000
+      [
+        target_patents_data('OB_Rx'),
+        target_patents_data('OB_OTC'),
+        target_patents_data('OB_Disc')
+      ].each do |new_patents_data|
         if new_patents_data
-          new_patents_data.each do |patent|
-            app = DrugApplication.find_by_application_number patent[:app_number]
-            if app
-              product = app.app_products.where(product_number: patent[:product_number]).first
+          new_patents_data.each_with_index do |patent, index|
+            if patent[:app_number].present? && index < limit
+              app = DrugApplication.find_by_application_number patent[:app_number]
+              if app
+                product = app.app_products.where(product_number: patent[:product_number]).first
 
-              if product.blank?
-                details_page = get_drug_details_page(patent[:app_number])
-                products_table = get_target_table(details_page, DRUG_PRODUCTS_TABLE_INDEX)
-                products = get_products_details(products_table, app.application_number, false)
-                attr = products.find {|key| key[:product_number] == patent[:product_number]}
+                if product.blank?
+                  details_page = get_drug_details_page(patent[:app_number])
+                  products_table = get_target_table(details_page, DRUG_PRODUCTS_TABLE_INDEX)
+                  products = get_products_details(products_table, app.application_number, false)
+                  attr = products.find {|key| key[:product_number] == patent[:product_number]}
 
-                product = save_products(app, attr)
+                  product = save_products(app, attr)
+                end
+
+                save_patent(product.id, patent)
               end
-
-              save_patent(product.id, patent)
             end
           end
         end

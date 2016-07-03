@@ -3,10 +3,13 @@ module Scraper
 
     attr_accessor :app, :no_results
 
-    def parse_new_drugs
-      new_drugs_page = get_new_drugs_page('http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu')
+    def parse_new_drugs mounth=nil, limit=1000
+      new_drugs_page = get_new_drugs_page(
+          'http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu',
+          mounth
+      )
       new_drugs_page.search('table[summary="Original New Drug Application(NDA) Approvals"] tr[valign="top"]').each_with_index do |drug_row, index|
-        if new_app? drug_row
+        if new_app?(drug_row) && index < limit
           drug_details_page = get_new_drug_details_page(new_drugs_page, index)
 
           if @no_results.blank?
@@ -29,20 +32,14 @@ module Scraper
       end
     end
 
-    def get_new_drugs_page url
+    def get_new_drugs_page url, mounth_number=nil
       page = get_data_page(url)
       form = page.form('MonthlyApprovalsAll')
+
       form.radiobutton_with(id: /OriginalNewDrugApprovals/).check
+      form.field_with(name: 'reportSelectMonth').option_with(value: mounth_number).click if mounth_number.present?
+
       new_page = form.submit
-
-      # empty_table = get_target_table(new_page, 2)
-
-      # text = empty_table.search('td strong a').text
-      # link = new_page.link_with(text: text)
-      # previous_page = link.click
-      #
-      # previous_page
-
 
       new_page
     end
