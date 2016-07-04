@@ -6,8 +6,9 @@ class DrugApplication < ActiveRecord::Base
   has_many :app_products
   belongs_to :drug
 
-
   validates :application_number, presence: true, uniqueness: true
+
+  # after_create :new_drug_info
 
 
 
@@ -31,6 +32,13 @@ class DrugApplication < ActiveRecord::Base
 
   api_accessible :full_single, extend: :basic do |t|
     t.add lambda{ |app| app.app_products.order('id').as_api_response(:basic) rescue nil }, as: :products
+  end
+
+
+  private
+
+  def new_drug_info
+    EmailService.new.new_drugs_info(self)
   end
 
 

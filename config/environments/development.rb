@@ -39,4 +39,17 @@ Rails.application.configure do
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
   config.log_level = :debug
+
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  # ActionMailer::Base.smtp_settings = {
+  #     user_name: 'vk61',
+  #     password: 'v1c0d1nv1c0d1n',
+  #     domain: '56abada5.ngrok.io',
+  #     address: 'smtp.sendgrid.net',
+  #     port: 587,
+  #     authentication: :plain,
+  #     enable_starttls_auto: true
+  # }
 end

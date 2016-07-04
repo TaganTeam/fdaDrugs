@@ -56,7 +56,7 @@ module Scraper
       data.each do |item|
         patents = Patent.where( 'number = ? AND deleted_at IS NULL',  item[:delisted_patent])
         if patents
-          patents.update_all(deleted_at: Time.now)
+          patents.destroy_all
         end
       end
     end

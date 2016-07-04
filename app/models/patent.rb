@@ -1,6 +1,7 @@
 class Patent < ActiveRecord::Base
 
   acts_as_api
+  acts_as_paranoid
   audited
 
   belongs_to :app_product

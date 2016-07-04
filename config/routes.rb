@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   get '/login', to: 'auth#login'
   get '/registration', to: 'auth#registration'
+  post '/deliver_email', to: 'email#deliver_email'
 
   # get '/*path' => 'auth#redirect'
 end

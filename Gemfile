@@ -31,6 +31,7 @@ end
 group :development do
     # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'letter_opener'
 end
 
 group :development, :test do
@@ -92,3 +93,8 @@ gem 'activeadmin', github: 'activeadmin'
 
 # Audited is an ORM extension that logs all changes to your models.
 gem 'audited-activerecord', '~> 4.0'
+
+# Calling destroy on an ActiveRecord object doesn't actually destroy the database record
+gem 'paranoia', '~> 2.0'
+
+gem 'sendgrid'
