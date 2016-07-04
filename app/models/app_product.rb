@@ -1,6 +1,7 @@
 class AppProduct < ActiveRecord::Base
 
   acts_as_api
+  audited
 
   has_many :patents
   has_many :exclusivities

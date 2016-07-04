@@ -89,3 +89,6 @@ gem 'daemons'
 gem 'newrelic_rpm'
 
 gem 'activeadmin', github: 'activeadmin'
+
+# Audited is an ORM extension that logs all changes to your models.
+gem 'audited-activerecord', '~> 4.0'

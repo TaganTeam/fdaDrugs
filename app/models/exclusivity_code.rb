@@ -1,6 +1,7 @@
 class ExclusivityCode < ActiveRecord::Base
 
   acts_as_api
+  audited
 
   has_many :exclusivities
 

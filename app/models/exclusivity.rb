@@ -1,6 +1,7 @@
 class Exclusivity < ActiveRecord::Base
 
   acts_as_api
+  audited
 
   belongs_to :app_product
   belongs_to :exclusivity_code

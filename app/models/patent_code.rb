@@ -1,6 +1,7 @@
 class PatentCode < ActiveRecord::Base
 
   acts_as_api
+  audited
 
   has_many :patents
 

@@ -1,6 +1,7 @@
 class DrugApplication < ActiveRecord::Base
 
   acts_as_api
+  audited
 
   has_many :app_products
   belongs_to :drug
