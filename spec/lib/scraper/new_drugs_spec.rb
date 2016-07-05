@@ -15,7 +15,7 @@ describe Scraper::NewDrugs do
   context 'exists and' do
     it 'should be at least one app and product' do
       VCR.use_cassette('new_drugs') do
-        Scraper::NewDrugs.new.parse_new_drugs
+        Scraper::NewDrugs.new.parse_new_drugs('6', 2)
         expect(DrugApplication.all).not_to be_empty
         expect(AppProduct.all).not_to be_empty
       end

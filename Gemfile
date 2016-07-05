@@ -98,3 +98,6 @@ gem 'audited-activerecord', '~> 4.0'
 gem 'paranoia', '~> 2.0'
 
 gem 'sendgrid'
+gem 'rails_db'
+# gem 'axlsx_rails'
+

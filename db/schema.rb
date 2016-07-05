@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+
 ActiveRecord::Schema.define(version: 20160704084820) do
 
   # These are extensions that must be enabled in order to support this database
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160704084820) do
     t.boolean  "parsed",              default: false
   end
 
+
   create_table "audits", force: :cascade do |t|
     t.integer  "auditable_id"
     t.string   "auditable_type"
@@ -83,6 +85,7 @@ ActiveRecord::Schema.define(version: 20160704084820) do
   add_index "audits", ["created_at"], name: "index_audits_on_created_at", using: :btree
   add_index "audits", ["request_uuid"], name: "index_audits_on_request_uuid", using: :btree
   add_index "audits", ["user_id", "user_type"], name: "user_index", using: :btree
+
 
   create_table "delayed_jobs", force: :cascade do |t|
     t.integer  "priority",     default: 0, null: false
@@ -161,6 +164,7 @@ ActiveRecord::Schema.define(version: 20160704084820) do
     t.datetime "updated_at",           null: false
     t.datetime "deleted_at"
   end
+
 
   add_index "patents", ["deleted_at"], name: "index_patents_on_deleted_at", using: :btree
 

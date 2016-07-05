@@ -12,6 +12,8 @@ class DrugApplication < ActiveRecord::Base
 
 
 
+
+
   api_accessible :light do |t|
     t.add :id
     t.add :application_number
@@ -40,6 +42,5 @@ class DrugApplication < ActiveRecord::Base
   def new_drug_info
     EmailService.new.new_drugs_info(self)
   end
-
 
 end

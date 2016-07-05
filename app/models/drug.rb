@@ -6,7 +6,6 @@ class Drug < ActiveRecord::Base
   has_many :drug_applications
   has_many :app_products, through: :drug_applications
 
-
   api_accessible :basic do |t|
     t.add :id
     t.add :brand_name

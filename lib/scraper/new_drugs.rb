@@ -3,11 +3,14 @@ module Scraper
 
     attr_accessor :app, :no_results
 
-    def parse_new_drugs
+    def parse_new_drugs mounth=nil, limit=1000
       new_apps = []
-      new_drugs_page = get_new_drugs_page('http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu')
+      new_drugs_page = get_new_drugs_page(
+          'http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu',
+          mounth
+      )
       new_drugs_page.search('table[summary="Original New Drug Application(NDA) Approvals"] tr[valign="top"]').each_with_index do |drug_row, index|
-        if new_app? drug_row
+        if new_app?(drug_row) && index < limit
           drug_details_page = get_new_drug_details_page(new_drugs_page, index)
 
           if @no_results.blank?
@@ -25,51 +28,36 @@ module Scraper
               save_patent_exclusivity_for(@app.application_number, product) if product.patent_status
             end
           else
-            p "---new_apps----#{new_apps}"
             send_no_drugs
-           return @no_results
+            return @no_results
           end
         end
       end
+
       unless new_apps.empty?
-        p "---new_apps----#{new_apps}"
         send_emails(new_apps)
       else
-        p "---new_apps----#{new_apps}"
         send_no_drugs
       end
-
-
-    end
-
-    def get_new_drugs_page url
-      page = get_data_page(url)
-      form = page.form('MonthlyApprovalsAll')
-      form.radiobutton_with(id: /OriginalNewDrugApprovals/).check
-      new_page = form.submit
-
-      empty_table = get_target_table(new_page, 2)
-
-      text = empty_table.search('td strong a').text
-      link = new_page.link_with(text: text)
-      previous_page = link.click
-
-      previous_page
-
-
-      # new_page
     end
 
     def send_emails(new_apps)
-      User.find_each do |user|
-        DrugsMailer.delay.new_drugs(new_apps, user)
-      end
+      Delayed::Job.enqueue NewDrugsEmailsJob.new(new_apps)
     end
 
     def send_no_drugs
-      User.find_each do |user|
-        DrugsMailer.delay.no_drugs(user)
-      end
+      Delayed::Job.enqueue NewDrugsEmptyEmailsJob.new
+    end
+
+    def get_new_drugs_page url, mounth_number=nil
+      page = get_data_page(url)
+      form = page.form('MonthlyApprovalsAll')
+
+      form.radiobutton_with(id: /OriginalNewDrugApprovals/).check
+      form.field_with(name: 'reportSelectMonth').option_with(value: mounth_number).click if mounth_number.present?
+      new_page = form.submit
+
+      new_page
     end
 
     def new_app? row
