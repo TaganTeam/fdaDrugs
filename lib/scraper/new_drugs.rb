@@ -3,7 +3,7 @@ module Scraper
 
     attr_accessor :app, :no_results
 
-    def parse_new_drugs mounth='6', limit=1000
+    def parse_new_drugs mounth=nil, limit=1000
       new_apps = []
       new_drugs_page = get_new_drugs_page(
           'http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu',
@@ -28,24 +28,24 @@ module Scraper
               save_patent_exclusivity_for(@app.application_number, product) if product.patent_status
             end
           else
-            send_no_drugs
+            send_no_drugs_emails
             return @no_results
           end
         end
       end
 
       unless new_apps.empty?
-        send_emails(new_apps)
+        send_drugs_emails(new_apps)
       else
-        send_no_drugs
+        send_no_drugs_emails
       end
     end
 
-    def send_emails(new_apps)
+    def send_drugs_emails(new_apps)
       Delayed::Job.enqueue NewDrugsEmailsJob.new(new_apps)
     end
 
-    def send_no_drugs
+    def send_no_drugs_emails
       Delayed::Job.enqueue NewDrugsEmptyEmailsJob.new
     end
 

@@ -1,7 +1,10 @@
 module Scraper
   class PatentsUpdate < BaseDrugs
 
+    attr_accessor :new_patent
+
     def parse_update_patents limit=1000
+      new_patents = []
       [
         target_patents_data('OB_Rx'),
         target_patents_data('OB_OTC'),
@@ -24,11 +27,22 @@ module Scraper
                 end
 
                 save_patent(product.id, patent)
+
+                if new_patent? @patent
+                  new_patents << @patent
+                end
               end
             end
           end
         end
       end
+
+      unless new_patents.empty?
+        send_patents_emails(new_patents)
+      else
+        send_no_patents_emails
+      end
+
       check_for_deleted_patents
     end
 
@@ -116,12 +130,23 @@ module Scraper
       index
     end
 
+    def new_patent? patent
+      patent.persisted?
+    end
 
+
+    def send_patents_emails(new_patents)
+      Delayed::Job.enqueue NewPatentsEmailsJob.new(new_patents)
+    end
+
+    def send_no_patents_emails
+      Delayed::Job.enqueue NewPatentsEmptyEmailsJob.new
+    end
 
     private
 
     def save_patent product_id, attr
-      Patent.create({
+      @patent = Patent.create({
                         app_product_id: product_id,
                         number: attr[:number],
                         patent_expiration: attr[:patent_expiration],

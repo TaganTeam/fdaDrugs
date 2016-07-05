@@ -7,6 +7,8 @@ class Patent < ActiveRecord::Base
   belongs_to :app_product
   belongs_to :patent_code
 
+  before_create :check_uniq
+
 
   api_accessible :basic do |t|
     t.add :patent_code_id
@@ -19,6 +21,11 @@ class Patent < ActiveRecord::Base
   end
 
 
-  validates :number, presence: true, uniqueness: {scope: :app_product_id}
+
+  private
+
+  def check_uniq
+    Patent.joins(:app_product).where('patents.number = ?', number).where('app_products.product_number = ?', app_product.product_number).blank?
+  end
 
 end

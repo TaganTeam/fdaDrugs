@@ -1,0 +1,34 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h4
+      New patents
+
+    %table.table.table-condensed.table-hover
+      %thead
+        %tr
+          %th Appl No
+          %th Prod No
+          %th Brand Name
+          %th Patent
+          %th Patent Expire
+          %th Patent Use Code
+      %tbody
+        - @updated_patents.each do |patent|
+          - product = patent.app_product
+          - application = product.drug_application
+          - drug = application.drug
+
+          %tr
+            %td #{application.application_number}
+            %td #{product.product_number}
+            %td #{drug.brand_name}
+            %td #{patent.number}
+            %td #{patent.patent_expiration}
+            %td #{patent.patent_code.code rescue nil}
+
+    %br
+    %p
+      Thanks for joining and have a great day!

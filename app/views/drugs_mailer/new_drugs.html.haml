@@ -3,13 +3,27 @@
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
   %body
-    %p
-      New drugs
-    - @new_apps.each do |app|
-      %span
-        = app.drug.brand_name + ', '
 
-    was added.
+    %h4
+      New Drugs
+
+    %table.table.table-condensed.table-hover
+      %thead
+        %tr
+          %th Drug Name/Appl No
+          %th Generic Name
+          %th Company
+          %th Approval date
+
+      %tbody
+        - @new_apps.each do |app|
+          - drug = app.drug
+
+          %tr
+            %td #{drug.brand_name} / #{app.application_number}
+            %td #{drug.generic_name}
+            %td #{app.company}
+            %td #{app.approval_date}
 
     %br
     %p
