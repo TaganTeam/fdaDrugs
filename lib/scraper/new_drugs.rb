@@ -3,7 +3,7 @@ module Scraper
 
     attr_accessor :app, :no_results
 
-    def parse_new_drugs mounth=nil, limit=1000
+    def parse_new_drugs mounth='6', limit=1000
       new_apps = []
       new_drugs_page = get_new_drugs_page(
           'http://www.accessdata.fda.gov/scripts/cder/drugsatfda/index.cfm?fuseaction=Reports.ReportsMenu',
