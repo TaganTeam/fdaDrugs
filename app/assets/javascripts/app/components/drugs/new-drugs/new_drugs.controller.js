@@ -11,7 +11,6 @@
         var vm = this;
 
 
-
         drugsService.getNewDrugsByMonth().then(function (response) {
             vm.newDrugs = response.data.data;
             vm.currentMonth = response.data.current_month;
