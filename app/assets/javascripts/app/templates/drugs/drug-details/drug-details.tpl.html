@@ -5,7 +5,7 @@
         <div class="col-md-3"><strong>Company</strong></div>
         <div class="col-md-3"><strong>Approval Ddate</strong></div>
     </div>
-    <div class="row" ng-repeat="app in detailsCtrl.appCollections" style="margin-bottom: 10px; margin-top: 10px;">
+    <div class="row drugs-animate" ng-repeat="app in detailsCtrl.appCollections" style="margin-bottom: 10px; margin-top: 10px;">
         <div class="col-md-3"><a href="/drugs/application/{{ app.id }}">{{ app.brand_name }}</a></div>
         <div class="col-md-3">{{ app.application_number }}</div>
         <div class="col-md-3">{{ app.company }}</div>
@@ -71,7 +71,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="product in detailsCtrl.drugDetails.products"
+            <tr class="drugs-animate" ng-repeat="product in detailsCtrl.drugDetails.products"
                 ng-class="{'success': detailsCtrl.isActive(product) }">
 
                 <td>{{ detailsCtrl.drugDetails.brand_name }}</td>

@@ -12,7 +12,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr ng-repeat="patent in patentCtrl.patents">
+        <tr class="drugs-animate" ng-repeat="patent in patentCtrl.patents">
             <td>{{ patent.number }}</td>
             <td>{{ patent.patent_expiration | date:"MMM d, y" }}</td>
             <td>{{ patent.drug_substance_claim }}</td>

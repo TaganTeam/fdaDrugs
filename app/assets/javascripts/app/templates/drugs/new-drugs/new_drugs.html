@@ -1,0 +1,26 @@
+<div class="row">
+    <h3 class="text-center">New drugs in <strong>{{ newDrugsCtrl.currentMonth | date:"MMMM" }}</strong></h3>
+
+    <table class="table table-condensed table-hover" style="margin-top: 20px">
+        <thead>
+        <tr>
+            <th>Drug Name/Appl No</th>
+            <th>Generic Name</th>
+            <th>Company</th>
+            <th>Approval date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="drugs-animate" ng-repeat="newDrug in newDrugsCtrl.newDrugs">
+            <td>
+                <a href="/drugs/{{ newDrug.drug_id }}">{{ newDrug.brand_name }}</a>
+                <br>
+                <a href="/drugs/application/{{ newDrug.id }}">{{ newDrug.application_number }}</a>
+            </td>
+            <td>{{ newDrug.generic_name | date:"MMM d, y" }}</td>
+            <td>{{ newDrug.company }}</td>
+            <td>{{ newDrug.approval_date | date:"MMM d, y" }}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

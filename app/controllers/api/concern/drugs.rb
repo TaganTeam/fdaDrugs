@@ -22,6 +22,16 @@ module API
          optional :access_token, type: String, desc: 'User access token'
        end
 
+       desc 'Return new drugs list in current month'
+       params do
+         optional :access_token, type: String, desc: 'User access token'
+       end
+
+       get '/new' do
+         drug_apps = DrugApplication.new_drugs
+         success! drug_apps.as_api_response(:basic), 200,'success', {current_month: Time.zone.now}
+       end
+
        get '/:id' do
          begin
            drug = Drug.find_by_id params[:id]
@@ -103,7 +113,6 @@ module API
            throw_error! 403, e.class.to_s, e.message
          end
        end
-
 
 
      end

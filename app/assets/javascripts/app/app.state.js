@@ -20,6 +20,7 @@ angular
                     controller: 'drugsController',
                     controllerAs: 'drugsCtrl'
                 })
+                
                 .state('paging', {
                     url: '/drugs?page',
                     templateUrl: 'drugs/drugs.tpl.html',
@@ -53,6 +54,12 @@ angular
                         productId: null,
                         productNumber: null
                     }
+                })
+                .state('new_drugs', {
+                    url: '/new_drugs',
+                    templateUrl: 'drugs/new-drugs/new_drugs.html',
+                    controller: 'newDrugsController',
+                    controllerAs: 'newDrugsCtrl'
                 });
 
         }]);

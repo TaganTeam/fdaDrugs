@@ -29,5 +29,5 @@ Rails.application.routes.draw do
 
   post '/deliver_email', to: 'email#deliver_email'
 
-  # get '/*path' => 'auth#redirect'
+  get '/*path' => 'auth#redirect'
 end

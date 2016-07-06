@@ -13,7 +13,8 @@
             getAppDetails: getAppDetails,
             getPatents: getPatents,
             getPatentCode: getPatentCode,
-            getExclusivityCode: getExclusivityCode
+            getExclusivityCode: getExclusivityCode,
+            getNewDrugsByMonth: getNewDrugsByMonth
         };
 
         function getDrugs(page) {
@@ -42,6 +43,10 @@
         
         function getExclusivityCode(exCodeId) {
             return  $http.get(CONFIG.APIProductionHost + '/api/v1/drugs/exclusivity-code/' + exCodeId)
+        }
+        
+        function getNewDrugsByMonth() {
+            return  $http.get(CONFIG.APIProductionHost + '/api/v1/drugs/new')
         }
 
     }

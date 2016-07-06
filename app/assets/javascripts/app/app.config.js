@@ -11,5 +11,5 @@ angular
     .constant('CONFIG',
         {
             APIDevHost: 'http://localhost:3000',
-            APIProductionHost: 'http://139.59.172.75/'
+            APIProductionHost: 'http://139.59.172.75'
         });

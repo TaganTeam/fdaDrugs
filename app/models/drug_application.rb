@@ -8,6 +8,8 @@ class DrugApplication < ActiveRecord::Base
 
   validates :application_number, presence: true, uniqueness: true
 
+  scope :new_drugs, -> { where('created_at >= ? AND created_at <= ?', Time.zone.now.beginning_of_month, Time.zone.now.end_of_month) }
+
   # after_create :new_drug_info
 
 
@@ -28,6 +30,7 @@ class DrugApplication < ActiveRecord::Base
   api_accessible :basic, extend: :light do |t|
     t.add lambda{ |app| app.drug.brand_name }, as: :brand_name
     t.add lambda{ |app| app.drug.generic_name }, as: :generic_name
+    t.add :drug_id
     t.add :company
     t.add :approval_date
   end
