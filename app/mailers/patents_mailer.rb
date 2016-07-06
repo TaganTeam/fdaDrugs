@@ -1,4 +1,5 @@
 class PatentsMailer < ActionMailer::Base
+  default from: 'bshc_piv <no-reply@bshc_piv.com>'
 
   def new_patents(patents, user)
     @updated_patents = patents

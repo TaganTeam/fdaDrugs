@@ -1,4 +1,5 @@
 class DrugsMailer < ActionMailer::Base
+  default from: 'bshc_piv <no-reply@bshc_piv.com>'
 
   def new_drugs(new_apps, user)
     @new_apps = new_apps
