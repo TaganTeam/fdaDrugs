@@ -1,8 +1,9 @@
-class NewPatentsEmailsJob < Struct.new(:new_patents)
+class NewPatentsEmailsJob < Struct.new(:patents, :is_new_patents)
 
   def perform
     User.find_each do |user|
-      PatentsMailer.new_patents(new_patents, user).deliver_now
+      is_new_patents ? PatentsMailer.new_patents(patents, user).deliver_now : PatentsMailer.deleted_patents(patents, user).deliver_now
     end
+    patents.each {|patent| patent.destroy} unless is_new_patents
   end
 end

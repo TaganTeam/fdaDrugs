@@ -73,12 +73,13 @@ module Scraper
     end
 
     def mark_patent_as_deleted data
+      delisted_patents = []
+
       data.each do |item|
-        patents = Patent.where( 'number = ? AND deleted_at IS NULL',  item[:delisted_patent])
-        if patents
-          patents.destroy_all
-        end
+        patent = Patent.joins(:app_product).where('patents.number = ? AND app_products.product_number = ?', item[:delisted_patent], item[:prod_number]).first
+        delisted_patents << patent unless patent.blank?
       end
+      Delayed::Job.enqueue NewPatentsEmailsJob.new(delisted_patents, false) unless delisted_patents.empty?
     end
 
 
@@ -88,6 +89,7 @@ module Scraper
       table.search('tr').each_with_index do |row, i|
         search_results = {}
         unless i == 0
+          search_results[:prod_number] = clear_name(row.search('td')[1].text)
           search_results[:delisted_patent] = clear_name(row.search('td')[4].text)
         end
         ary << search_results
@@ -136,7 +138,7 @@ module Scraper
 
 
     def send_patents_emails(new_patents)
-      Delayed::Job.enqueue NewPatentsEmailsJob.new(new_patents)
+      Delayed::Job.enqueue NewPatentsEmailsJob.new(new_patents, true)
     end
 
     def send_no_patents_emails

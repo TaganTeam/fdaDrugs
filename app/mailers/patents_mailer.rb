@@ -7,6 +7,12 @@ class PatentsMailer < ActionMailer::Base
     mail(to: user.email, subject: 'New patents' )
   end
 
+  def deleted_patents(patents, user)
+    @deleted_patents = patents
+    Rails.logger.info
+    mail(to: user.email, subject: 'New patents' )
+  end
+
 
   def no_patents user
     mail(to: user.email, subject: 'No patents' )

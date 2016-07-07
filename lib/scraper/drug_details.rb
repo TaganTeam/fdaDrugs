@@ -5,7 +5,7 @@ module Scraper
   class DrugDetails < BaseDrugs
 
     def parse_drugs count_for_iteration=100
-      DrugApplication.where(drug_id: 6154).first(count_for_iteration).each do |app|
+      DrugApplication.where(drug_id: nil).first(count_for_iteration).each do |app|
         details_page = get_drug_details_page(app.application_number)
 
         if details_page.present?
