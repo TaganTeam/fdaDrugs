@@ -97,7 +97,9 @@ module Scraper
     end
 
     def is_drug_details? page
-      page.at('#user_provided table td.product_table a').nil?
+      node = get_target_table(page, 3)
+      str = clear_name(node.text) rescue false
+      (str == 'DrugDetails') ? true : false
     end
 
     def get_another_page page
