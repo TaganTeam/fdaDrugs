@@ -24,7 +24,7 @@ class DrugApplication < ActiveRecord::Base
   api_accessible :light_status do |t|
     t.add :id
     t.add :application_number
-    # t.add lambda{ |app| app.app_products.map(&:patent_status).uniq.as_api_response(:status) }, as: :status
+    t.add lambda{ |app| app.app_products.map(&:patent_status).uniq.as_api_response(:status) }, as: :status
   end
 
   api_accessible :basic, extend: :light do |t|
