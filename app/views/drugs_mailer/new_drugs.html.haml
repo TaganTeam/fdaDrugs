@@ -23,7 +23,7 @@
             %td #{drug.brand_name} / #{app.application_number}
             %td #{drug.generic_name}
             %td #{app.company}
-            %td #{app.approval_date}
+            %td #{app.approval_date.strftime('%B %d, %Y')}
 
     %br
     %p

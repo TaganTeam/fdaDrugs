@@ -26,7 +26,7 @@
             %td #{product.product_number}
             %td #{drug.brand_name}
             %td #{patent.number}
-            %td #{patent.patent_expiration}
+            %td #{patent.patent_expiration.strftime('%B %d, %Y')}
             %td #{patent.patent_code.code rescue nil}
 
     %br
