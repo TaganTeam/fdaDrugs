@@ -1,5 +1,5 @@
 # Change these
-server '52.41.210.225', port: 80, roles: [:web, :app, :db], primary: true
+server '52.41.210.225', port: 22, roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'git@github.com:TaganTeam/fdaDrugs.git'
 set :application,     'bshc_piv'
