@@ -1,7 +1,7 @@
 # Change these
-server '139.59.172.75', port: 22, roles: [:web, :app, :db], primary: true
+server '52.41.210.225', port: 80, roles: [:web, :app, :db], primary: true
 
-set :repo_url,        'git@bitbucket.org:tagan-team/bshc_piv.git'
+set :repo_url,        'git@github.com:TaganTeam/fdaDrugs.git'
 set :application,     'bshc_piv'
 set :user,            'deploy'
 set :puma_threads,    [4, 16]
